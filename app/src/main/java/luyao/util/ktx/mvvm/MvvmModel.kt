@@ -1,12 +1,10 @@
 package luyao.util.ktx.mvvm
 
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
-import luyao.ktx.base.BaseViewModel
+import luyao.util.ktx.base.BaseViewModel
 
 /**
  * Created by luyao

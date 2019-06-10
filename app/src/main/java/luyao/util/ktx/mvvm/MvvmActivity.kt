@@ -4,8 +4,8 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.activity_mvvm_demo.*
 import luyao.ktx.R
-import luyao.ktx.base.BaseVMActivity
-import luyao.ktx.ext.toast
+import luyao.util.ktx.base.BaseVMActivity
+import luyao.util.ktx.ext.toast
 
 /**
  * Created by luyao

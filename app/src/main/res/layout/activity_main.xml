@@ -6,12 +6,19 @@
         android:layout_height="match_parent"
         tools:context="luyao.util.ktx.MainActivity"
         android:orientation="vertical"
-        android:gravity="center_horizontal">
+        android:gravity="center">
 
     <Button
             android:id="@+id/btMvvm"
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:text="MVVM"/>
+
+    <Button
+            android:id="@+id/btExt"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:text="扩展函数"
+            android:layout_marginTop="10dp"/>
 
 </LinearLayout>
