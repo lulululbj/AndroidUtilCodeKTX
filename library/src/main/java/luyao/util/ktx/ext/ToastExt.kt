@@ -44,5 +44,4 @@ fun Any.longToast(context: Context, @StringRes id: Int) {
     context.longToast(id)
 }
 
-fun Context.getVersionName(): String = packageManager.getPackageInfo(packageName, 0).versionName
 

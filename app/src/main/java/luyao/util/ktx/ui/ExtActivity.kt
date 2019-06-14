@@ -1,11 +1,12 @@
 package luyao.util.ktx.ui
 
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentPagerAdapter
+import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_ext.*
+import kotlinx.android.synthetic.main.title_layout.*
 import luyao.ktx.R
+import luyao.util.ktx.adapter.CommonAdapter
 import luyao.util.ktx.base.BaseActivity
-import luyao.util.ktx.ui.fragment.ContextExtFragment
+import luyao.util.ktx.ext.itemPadding
 
 /**
  * Created by luyao
@@ -13,19 +14,18 @@ import luyao.util.ktx.ui.fragment.ContextExtFragment
  */
 class ExtActivity : BaseActivity() {
 
-    private val titleList = arrayOf("Context", "String")
-    private val fragmentList = arrayListOf<Fragment>()
+    private val dataList = ArrayList<String>()
+    private val commonAdapter by lazy { CommonAdapter() }
 
-    private val contextExtFragment = ContextExtFragment()
-    private val stringExtFragment = ContextExtFragment()
-
+    init {
+        dataList.run {
+            add("ToastExt")
+            add("AppExt")
+        }
+    }
 
     override fun getLayoutResId() = R.layout.activity_ext
 
-    init {
-        fragmentList.add(contextExtFragment)
-        fragmentList.add(stringExtFragment)
-    }
 
     override fun initView() {
         mToolbar.run {
@@ -33,21 +33,27 @@ class ExtActivity : BaseActivity() {
             setNavigationIcon(R.drawable.arrow_back)
         }
 
-        initViewPager()
+        initRecycleView()
     }
 
     override fun initData() {
+        commonAdapter.setNewData(dataList)
     }
 
-    private fun initViewPager() {
-        extViewPager.adapter =
-            object : FragmentPagerAdapter(supportFragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
-                override fun getItem(position: Int) = fragmentList[position]
+    private fun initRecycleView() {
+        commonAdapter.setOnItemClickListener { _, _, position ->
+            handleClick(position)
+        }
+        extRecycleView.run {
+            itemPadding(5,5,10,10)
+            layoutManager = LinearLayoutManager(this@ExtActivity)
+            adapter = commonAdapter
+        }
+    }
 
-                override fun getCount() = fragmentList.size
-
-                override fun getPageTitle(position: Int) = titleList[position]
-            }
-        extTabLayout.setupWithViewPager(extViewPager)
+    private fun handleClick(position: Int) {
+        when (position) {
+            0 -> startActivity(ToastExtActivity::class.java)
+        }
     }
 }

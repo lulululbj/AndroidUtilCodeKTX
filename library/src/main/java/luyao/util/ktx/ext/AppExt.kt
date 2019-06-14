@@ -10,9 +10,8 @@ import java.io.File
  * on 2019/6/12 10:53
  */
 
-/**
- * get [AppInfo] by apk file path
- */
+fun Context.getVersionName(): String = packageManager.getPackageInfo(packageName, 0).versionName
+
 fun Context.getAppInfo(apkPath: String): AppInfo {
     val packageInfo = packageManager.getPackageInfo(apkPath,PackageManager.GET_META_DATA)
     packageInfo.applicationInfo.sourceDir=apkPath
@@ -26,9 +25,6 @@ fun Context.getAppInfo(apkPath: String): AppInfo {
     return AppInfo(apkPath,packageName,versionName,versionCode,appName,icon)
 }
 
-/**
- * get [AppInfo] list by apk folder path
- */
 fun Context.getAppInfos(apkFolderPath:String):List<AppInfo>{
     val appInfoList = ArrayList<AppInfo>()
     for (file in File(apkFolderPath).listFiles())
