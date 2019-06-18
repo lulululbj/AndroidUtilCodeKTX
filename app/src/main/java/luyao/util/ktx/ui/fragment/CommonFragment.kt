@@ -5,6 +5,7 @@ import kotlinx.android.synthetic.main.fragment_context_ext.*
 import luyao.ktx.R
 import luyao.util.ktx.adapter.CommonAdapter
 import luyao.util.ktx.base.BaseFragment
+import luyao.util.ktx.bean.ItemBean
 
 /**
  * Created by luyao
@@ -12,7 +13,7 @@ import luyao.util.ktx.base.BaseFragment
  */
 abstract class CommonFragment : BaseFragment() {
 
-    open val dataList = ArrayList<String>()
+    open val dataList = ArrayList<ItemBean>()
     private val commonAdapter by lazy { CommonAdapter() }
 
     override fun getLayoutResId() = R.layout.fragment_context_ext

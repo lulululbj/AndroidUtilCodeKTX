@@ -33,5 +33,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation 'com.google.android.material:material:1.1.0-alpha07'
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.45-androidx'
+    implementation 'com.afollestad.material-dialogs:core:3.0.0-rc4'
+    implementation 'com.afollestad.material-dialogs:files:3.0.0-rc4'
     implementation project(path: ':library')
 }
