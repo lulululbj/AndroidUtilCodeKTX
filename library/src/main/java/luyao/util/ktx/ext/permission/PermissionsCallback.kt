@@ -6,7 +6,7 @@ interface PermissionsCallback {
 
     fun onDenied(permissions: List<String>)
 
-    fun onShowRationale(permissions: List<String>)
+    fun onShowRationale(request: PermissionRequest)
 
     fun onNeverAskAgain(permissions: List<String>)
 }
@@ -18,7 +18,7 @@ class PermissionsCallbackDSL : PermissionsCallback {
 
     private var onGranted: () -> Unit = {}
     private var onDenied: (permissions: List<String>) -> Unit = {}
-    private var onShowRationale: (permissions: List<String>) -> Unit = {}
+    private var onShowRationale: (request: PermissionRequest) -> Unit = {}
     private var onNeverAskAgain: (permissions: List<String>) -> Unit = {}
 
     fun onGranted(func: () -> Unit) {
@@ -29,7 +29,7 @@ class PermissionsCallbackDSL : PermissionsCallback {
         onDenied = func
     }
 
-    fun onShowRationale(func: (permissions: List<String>) -> Unit) {
+    fun onShowRationale(func: (request: PermissionRequest) -> Unit) {
         onShowRationale = func
     }
 
@@ -45,8 +45,8 @@ class PermissionsCallbackDSL : PermissionsCallback {
         onDenied.invoke(permissions)
     }
 
-    override fun onShowRationale(permissions: List<String>) {
-        onShowRationale.invoke(permissions)
+    override fun onShowRationale(request: PermissionRequest) {
+        onShowRationale.invoke(request)
     }
 
     override fun onNeverAskAgain(permissions: List<String>) {

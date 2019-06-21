@@ -10,8 +10,6 @@ import androidx.fragment.app.Fragment
  */
 class KtxPermissionFragment : Fragment() {
 
-    private val PERMISSION_REQUEST_CODE = 0XFF
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         retainInstance = true
