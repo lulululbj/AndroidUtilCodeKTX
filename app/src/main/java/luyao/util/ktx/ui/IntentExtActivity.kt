@@ -1,13 +1,12 @@
 package luyao.util.ktx.ui
 
+import android.Manifest
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.files.FileFilter
 import com.afollestad.materialdialogs.files.fileChooser
 import luyao.util.ktx.bean.ItemBean
-import luyao.util.ktx.ext.goToAppInfoPage
-import luyao.util.ktx.ext.goToDateAndTimePage
-import luyao.util.ktx.ext.goToLanguagePage
-import luyao.util.ktx.ext.installApk
+import luyao.util.ktx.ext.*
+import luyao.util.ktx.ext.permission.request
 
 /**
  * Created by luyao
@@ -35,10 +34,32 @@ class IntentExtActivity : CommonListActivity() {
         }
     }
 
-    private val apkFilter: FileFilter = { it.name.endsWith(".apk") }
+
     private fun installApk() {
+
+        request(Manifest.permission.READ_EXTERNAL_STORAGE) {
+            onGranted {
+                chooseFile()
+            }
+
+            onDenied {
+                toast("onDenied")
+            }
+
+            onShowRationale {
+                toast("onShowRationale")
+            }
+
+            onNeverAskAgain {
+                toast("onNeverAskAgain")
+            }
+        }
+    }
+
+    private fun chooseFile() {
+        val apkFilter: FileFilter = { it.name.endsWith(".apk") }
         MaterialDialog(this).show {
-            fileChooser(filter = apkFilter) { dialog, file ->
+            fileChooser(filter = apkFilter) { _, file ->
                 installApk(file)
             }
         }

@@ -68,9 +68,13 @@ fun Context.getInstallIntent(apkFile: File): Intent? {
         uri = FileProvider.getUriForFile(this, authority, apkFile)
     }
     intent.setDataAndType(uri, "application/vnd.android.package-archive")
+    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
     return intent
 }
 
+/**
+ * need android.permission.REQUEST_INSTALL_PACKAGES after N
+ */
 fun Context.installApk(apkFile: File) {
     val intent = getInstallIntent(apkFile)
     intent?.run { startActivity(this) }

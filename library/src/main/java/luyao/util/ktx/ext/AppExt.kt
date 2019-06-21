@@ -13,7 +13,7 @@ import java.io.File
 fun Context.getVersionName(): String = packageManager.getPackageInfo(packageName, 0).versionName
 
 fun Context.getAppInfo(apkPath: String): AppInfo {
-    val packageInfo = packageManager.getPackageInfo(apkPath,PackageManager.GET_META_DATA)
+    val packageInfo = packageManager.getPackageArchiveInfo(apkPath,PackageManager.GET_META_DATA)
     packageInfo.applicationInfo.sourceDir=apkPath
     packageInfo.applicationInfo.publicSourceDir=apkPath
 
