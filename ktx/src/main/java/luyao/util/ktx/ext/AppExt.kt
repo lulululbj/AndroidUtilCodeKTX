@@ -20,9 +20,9 @@ fun Context.getAppInfo(apkPath: String): AppInfo {
     val packageName = packageInfo.packageName
     val appName =packageManager.getApplicationLabel(packageInfo.applicationInfo).toString()
     val versionName = packageInfo.versionName
-    val versionCode = packageInfo.longVersionCode
+    val versionCode = packageInfo.versionCode
     val icon = packageManager.getApplicationIcon(packageInfo.applicationInfo)
-    return AppInfo(apkPath,packageName,versionName,versionCode,appName,icon)
+    return AppInfo(apkPath,packageName,versionName, versionCode.toLong(),appName,icon)
 }
 
 fun Context.getAppInfos(apkFolderPath:String):List<AppInfo>{
