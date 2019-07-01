@@ -1,19 +1,18 @@
 package luyao.util.ktx.ext
 
-import kotlin.experimental.and
-
 /**
  * Created by luyao
  * on 2019/6/14 15:43
  */
 
-fun ByteArray.toHexString(): String {
-    val builder = StringBuilder()
-    for (b in this) {
-        var hex = Integer.toHexString((b and 0xFF.toByte()).toInt())
-        if (hex.length == 1) hex = "0$hex"
-        builder.append(hex.toUpperCase())
-    }
-    return builder.toString()
+private val HEX_DIGITS = charArrayOf('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f')
 
+fun ByteArray.toHexString(): String {
+    val result = CharArray(size shl 1)
+    var index = 0
+    for (b in this) {
+        result[index++] = HEX_DIGITS[b.toInt().shr(4) and 0xf]
+        result[index++] = HEX_DIGITS[b.toInt() and 0xf]
+    }
+    return String(result)
 }

@@ -3,7 +3,7 @@
 
 
     
-    <application android:name=".KtxApp">
+    <application >
         
         <provider
                 android:authorities="luyao.util.ktx.fileprovider"

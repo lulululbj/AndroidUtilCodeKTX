@@ -11,6 +11,9 @@ import androidx.fragment.app.FragmentActivity
  * Created by luyao
  * on 2019/6/18 15:47
  */
+
+const val TAG ="ktx"
+
 fun FragmentActivity.request(vararg permissions: String) {
     ActivityCompat.requestPermissions(this, permissions, 0XFF)
 }
@@ -55,10 +58,10 @@ fun FragmentActivity.request(vararg permissions: String, callbacks: PermissionsC
 }
 
 private fun getKtxPermissionFragment(activity: FragmentActivity): KtxPermissionFragment {
-    var fragment = activity.supportFragmentManager.findFragmentByTag("ktx")
+    var fragment = activity.supportFragmentManager.findFragmentByTag(TAG)
     if (fragment == null) {
         fragment = KtxPermissionFragment()
-        activity.supportFragmentManager.beginTransaction().add(fragment, "ktx").commitNow()
+        activity.supportFragmentManager.beginTransaction().add(fragment, TAG).commitNow()
     }
     return fragment as KtxPermissionFragment
 }
@@ -67,10 +70,4 @@ private fun getKtxPermissionFragment(activity: FragmentActivity): KtxPermissionF
 fun Activity.isGranted(permission: String): Boolean {
     return Build.VERSION.SDK_INT < Build.VERSION_CODES.M ||
             ContextCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_GRANTED
-}
-
-fun Activity.isRevoked(permission: String): Boolean {
-    return Build.VERSION.SDK_INT >= Build.VERSION_CODES.M &&
-            packageManager.isPermissionRevokedByPolicy(permission, packageName) // 设备规范禁止该权限,比如 dpm
-
 }

@@ -22,9 +22,7 @@ fun Context.getAppInfoIntent(): Intent =
         addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
     }
 
-/**
- * 跳转到应用信息页面
- */
+/** 跳转到应用信息页面 */
 fun Context.goToAppInfoPage() {
     startActivity(getAppInfoIntent())
 }
@@ -78,4 +76,9 @@ fun Context.getInstallIntent(apkFile: File): Intent? {
 fun Context.installApk(apkFile: File) {
     val intent = getInstallIntent(apkFile)
     intent?.run { startActivity(this) }
+}
+
+/** 浏览器打开指定网页 */
+fun Context.openBrowser(url:String){
+    Intent(Intent.ACTION_VIEW,Uri.parse(url)).run { startActivity(this) }
 }

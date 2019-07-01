@@ -22,6 +22,7 @@ class IntentExtActivity : CommonListActivity() {
             add(ItemBean("Date And Timezone", null))
             add(ItemBean("Language And Input", null))
             add(ItemBean("Install Apk", null))
+            add(ItemBean("Open Browser", null))
         }
     }
 
@@ -31,6 +32,7 @@ class IntentExtActivity : CommonListActivity() {
             1 -> goToDateAndTimePage()
             2 -> goToLanguagePage()
             3 -> installApk()
+            4 -> openBrowser("https://www.baidu.com")
         }
     }
 
