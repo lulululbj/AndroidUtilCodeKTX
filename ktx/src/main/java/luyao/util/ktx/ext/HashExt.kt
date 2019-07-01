@@ -44,7 +44,7 @@ fun ByteArray.sha512Bytes(): ByteArray = hash(this, Hash.SHA512)
 fun ByteArray.sha512(): String = hash(this, Hash.SHA512).toHexString()
 fun String.sha512(charset: Charset = Charset.forName("utf-8")): String = toByteArray(charset).sha512()
 
-fun File.hash(algorithm: Hash): String {
+fun File.hash(algorithm: Hash = Hash.SHA1): String {
     if (!exists() || !isFile) return ""
     val fin: FileInputStream
     val messageDigest: MessageDigest
