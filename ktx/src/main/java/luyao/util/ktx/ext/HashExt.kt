@@ -12,7 +12,7 @@ import java.security.NoSuchAlgorithmException
  * Created by luyao
  * on 2019/6/14 15:28
  */
-fun ByteArray.hash(data: ByteArray, algorithm: Hash): ByteArray {
+private fun hash(data: ByteArray, algorithm: Hash): ByteArray {
     val messageDigest = MessageDigest.getInstance(algorithm.name)
     return messageDigest.digest(data)
 }
