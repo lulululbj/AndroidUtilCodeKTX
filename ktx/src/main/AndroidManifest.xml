@@ -6,7 +6,7 @@
     <application >
         
         <provider
-                android:authorities="luyao.util.ktx.fileprovider"
+                android:authorities="${applicationId}.fileprovider"
                 android:name="androidx.core.content.FileProvider"
                 android:exported="false"
                 android:grantUriPermissions="true">
