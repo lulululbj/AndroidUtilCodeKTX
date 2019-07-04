@@ -32,7 +32,7 @@ fun Any.toast(context: Context, content: String, duration: Int = Toast.LENGTH_SH
     context.toast(content, duration)
 }
 
-fun Any.toast(context: Context, @StringRes id: Int, duration: Int) {
+fun Any.toast(context: Context, @StringRes id: Int, duration: Int=Toast.LENGTH_SHORT) {
     context.toast(id, duration)
 }
 

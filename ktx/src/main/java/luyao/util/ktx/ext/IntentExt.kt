@@ -1,5 +1,6 @@
 package luyao.util.ktx.ext
 
+import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -14,7 +15,7 @@ import java.io.File
  */
 
 
-fun Context.getAppInfoIntent(): Intent =
+fun Context.getAppInfoIntent(packageName: String = this.packageName): Intent =
     Intent(
         Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
         Uri.fromParts("package", packageName, null)
@@ -23,8 +24,8 @@ fun Context.getAppInfoIntent(): Intent =
     }
 
 /** 跳转到应用信息页面 */
-fun Context.goToAppInfoPage() {
-    startActivity(getAppInfoIntent())
+fun Context.goToAppInfoPage(packageName: String = this.packageName) {
+    startActivity(getAppInfoIntent(packageName))
 }
 
 fun Context.getDateAndTimeIntent(): Intent =
@@ -79,6 +80,31 @@ fun Context.installApk(apkFile: File) {
 }
 
 /** 浏览器打开指定网页 */
-fun Context.openBrowser(url:String){
-    Intent(Intent.ACTION_VIEW,Uri.parse(url)).run { startActivity(this) }
+fun Context.openBrowser(url: String) {
+    Intent(Intent.ACTION_VIEW, Uri.parse(url)).run { startActivity(this) }
 }
+
+fun Context.openInAppStore(packageName: String = this.packageName) {
+    val intent = Intent(Intent.ACTION_VIEW)
+    try {
+        intent.data = Uri.parse("market://details?id=$packageName")
+        startActivity(intent)
+    } catch (ifPlayStoreNotInstalled: ActivityNotFoundException) {
+        intent.data =
+            Uri.parse("https://play.google.com/store/apps/details?id=$packageName")
+        startActivity(intent)
+    }
+}
+
+fun Context.openApp(packageName: String) =
+    packageManager.getLaunchIntentForPackage(packageName)?.run { startActivity(this) }
+
+fun Context.uninstallApp(packageName: String) {
+    Intent(Intent.ACTION_DELETE).run {
+        data = Uri.parse("package:$packageName")
+        startActivity(this)
+    }
+}
+
+fun Context.goToAccessibilitySetting() = Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS).run { startActivity(this) }
+

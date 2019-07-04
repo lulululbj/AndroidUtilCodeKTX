@@ -1,5 +1,7 @@
 package luyao.util.ktx.ext
 
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.Context
 import android.view.View
 
@@ -26,4 +28,15 @@ fun View.dp2px(dp: Float): Int {
 fun View.px2dp(px: Float): Int {
     val scale = resources.displayMetrics.density
     return (px / scale + 0.5f).toInt()
+}
+
+
+fun Context.getWidth() = resources.displayMetrics.widthPixels
+
+fun Context.getHeight() = resources.displayMetrics.heightPixels
+
+fun Context.copyToClipboard(text:String){
+    val cm = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+    val clipData= ClipData.newPlainText("text",text)
+    cm.primaryClip=clipData
 }
