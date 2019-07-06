@@ -21,7 +21,10 @@ class IntentExtActivity : CommonListActivity() {
             add(ItemBean("App Info", null))
             add(ItemBean("Date And Timezone", null))
             add(ItemBean("Language And Input", null))
+            add(ItemBean("Accessibility Setting",null))
             add(ItemBean("Install Apk", null))
+            add(ItemBean("Uninstall Apk",null))
+            add(ItemBean("Open in store",null))
             add(ItemBean("Open Browser", null))
         }
     }
@@ -31,8 +34,11 @@ class IntentExtActivity : CommonListActivity() {
             0 -> goToAppInfoPage()
             1 -> goToDateAndTimePage()
             2 -> goToLanguagePage()
-            3 -> installApk()
-            4 -> openBrowser("https://www.baidu.com")
+            3 -> goToAccessibilitySetting()
+            4 -> installApk()
+            5 -> uninstallApp(packageName)
+            6 -> openInAppStore(packageName)
+            7 -> openBrowser("https://www.baidu.com")
         }
     }
 

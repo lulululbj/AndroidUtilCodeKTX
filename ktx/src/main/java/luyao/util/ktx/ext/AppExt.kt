@@ -12,6 +12,7 @@ import java.io.File
  */
 
 fun Context.getVersionName(): String = packageManager.getPackageInfo(packageName, 0).versionName
+fun Context.getVersionCode(): Int = packageManager.getPackageInfo(packageName,0).versionCode
 
 fun Context.getAppInfo(apkPath: String): AppInfo {
     val packageInfo = packageManager.getPackageArchiveInfo(apkPath, PackageManager.GET_META_DATA)
