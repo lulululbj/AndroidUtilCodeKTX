@@ -23,6 +23,7 @@ class SharedPreferencesActivity : BaseActivity() {
 
     override fun initData() {
 
+
         putInt.setOnClickListener {
             putSpValue("int", 1)
             toast(getSpValue("int", 0).toString())
@@ -33,7 +34,7 @@ class SharedPreferencesActivity : BaseActivity() {
         }
         putBoolean.setOnClickListener {
             putSpValue("boolean", true)
-            toast(getSpValue("boolean", false).toString())
+            toast(getSpValue(key = "boolean", default = false).toString())
         }
         putString.setOnClickListener {
             putSpValue("string", "ktx")
@@ -47,9 +48,16 @@ class SharedPreferencesActivity : BaseActivity() {
             putSpValue("tag1", 1)
             putSpValue("tag2", false)
             putSpValue("tag3", Person("bingxin", 1))
-            toast("${getSpValue("tag1",0)}\n" +
-                    "${getSpValue("tag2",true)}\n" +
-                    "${getSpValue("tag3",Person("default",0))}")
+            toast(
+                "${getSpValue("tag1", 0)}\n" +
+                        "${getSpValue("tag2", true)}\n" +
+                        "${getSpValue("tag3", Person("default", 0))}"
+            )
+        }
+
+        putAnotherFile.setOnClickListener {
+            putSpValue("another","from another sp file",name = "another")
+            toast(getSpValue("another","null",name = "another"))
         }
     }
 }

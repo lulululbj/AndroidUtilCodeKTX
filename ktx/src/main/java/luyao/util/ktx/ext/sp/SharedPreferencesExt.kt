@@ -23,48 +23,59 @@ inline fun SharedPreferences.edit(commit: Boolean = false, action: SharedPrefere
         editor.apply()
 }
 
-fun Context.sp(name: String = packageName, mode: Int = Context.MODE_PRIVATE) =
+fun Context.sp(name: String = packageName, mode: Int = Context.MODE_PRIVATE): SharedPreferences =
     getSharedPreferences(name, mode)
 
-fun Activity.sp(name: String = packageName, mode: Int = Context.MODE_PRIVATE) =
+fun Activity.sp(name: String = packageName, mode: Int = Context.MODE_PRIVATE): SharedPreferences =
     getSharedPreferences(name, mode)
 
 
-fun <T> Context.putSpValue(name: String, value: T) = sp().edit {
+fun <T> Context.putSpValue(name: String = packageName, key: String, value: T) = sp(name).edit {
     when (value) {
-        is Long -> putLong(name, value)
-        is String -> putString(name, value)
-        is Int -> putInt(name, value)
-        is Boolean -> putBoolean(name, value)
-        is Float -> putFloat(name, value)
-        else -> putString(name, serialize(value))
+        is Long -> putLong(key, value)
+        is String -> putString(key, value)
+        is Int -> putInt(key, value)
+        is Boolean -> putBoolean(key, value)
+        is Float -> putFloat(key, value)
+        else -> putString(key, serialize(value))
     }
 }
 
-fun <T> Activity.putSpValue(name: String, value: T) = sp().edit {
+fun <T> Activity.putSpValue(key: String, value: T, name: String = packageName) = sp(name).edit {
     when (value) {
-        is Long -> putLong(name, value)
-        is String -> putString(name, value)
-        is Int -> putInt(name, value)
-        is Boolean -> putBoolean(name, value)
-        is Float -> putFloat(name, value)
-        else -> putString(name, serialize(value))
+        is Long -> putLong(key, value)
+        is String -> putString(key, value)
+        is Int -> putInt(key, value)
+        is Boolean -> putBoolean(key, value)
+        is Float -> putFloat(key, value)
+        else -> putString(key, serialize(value))
     }
 }
 
-fun <T> Context.getSpValue(key: String, default: T) :T{
-    sp().run {
-        val result = when (default) {
-            is Long -> getLong(key, default)
-            is String -> getString(key, default)
-            is Int -> getInt(key, default)
-            is Boolean -> getBoolean(key, default)
-            is Float -> getFloat(key, default)
-            else -> deSerialization(getString(key, serialize(default)))
-        }
-        return result as T
+fun <T> Context.getSpValue(key: String, default: T, name: String = packageName ): T = sp(name).run {
+    val result = when (default) {
+        is Long -> getLong(key, default)
+        is String -> getString(key, default)
+        is Int -> getInt(key, default)
+        is Boolean -> getBoolean(key, default)
+        is Float -> getFloat(key, default)
+        else -> deSerialization(getString(key, serialize(default)))
     }
+    result as T
 }
+
+fun <T> Activity.getSpValue(key: String, default: T, name: String = packageName): T = sp(name).run {
+    val result = when (default) {
+        is Long -> getLong(key, default)
+        is String -> getString(key, default)
+        is Int -> getInt(key, default)
+        is Boolean -> getBoolean(key, default)
+        is Float -> getFloat(key, default)
+        else -> deSerialization(getString(key, serialize(default)))
+    }
+    return result as T
+}
+
 
 private fun <T> serialize(obj: T): String {
     val byteArrayOutputStream = ByteArrayOutputStream()

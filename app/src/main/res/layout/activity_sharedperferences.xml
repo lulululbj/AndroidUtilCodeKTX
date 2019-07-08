@@ -36,4 +36,9 @@
             android:text="putMulti"
             style="@style/NormalButton"/>
 
+    <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/putAnotherFile"
+            android:text="putAnotherFile"
+            style="@style/NormalButton"/>
+
 </LinearLayout>
