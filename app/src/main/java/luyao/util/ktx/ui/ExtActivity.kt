@@ -16,6 +16,7 @@ class ExtActivity : CommonListActivity() {
             add(ItemBean("AppExt", ToastExtActivity::class.java))
             add(ItemBean("IntentExt", IntentExtActivity::class.java))
             add(ItemBean("PermissionExt",PermissionExtActivity::class.java))
+            add(ItemBean("SharedPreferencesExt",SharedPreferencesActivity::class.java))
         }
     }
 

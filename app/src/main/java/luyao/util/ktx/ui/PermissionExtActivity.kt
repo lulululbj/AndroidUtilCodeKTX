@@ -3,6 +3,7 @@ package luyao.util.ktx.ui
 import android.Manifest
 import com.afollestad.materialdialogs.MaterialDialog
 import kotlinx.android.synthetic.main.activity_permission_ext.*
+import kotlinx.android.synthetic.main.title_layout.*
 import luyao.ktx.R
 import luyao.util.ktx.base.BaseActivity
 import luyao.util.ktx.ext.goToAppInfoPage
@@ -19,6 +20,7 @@ class PermissionExtActivity : BaseActivity() {
     override fun getLayoutResId() = R.layout.activity_permission_ext
 
     override fun initView() {
+        mToolbar.title = "PermissionExt"
         requestCamera.setOnClickListener { requestCameraPermission() }
         requestCalendarAndAudio.setOnClickListener { requestCalendarAndAudioPermission() }
     }

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <include layout="@layout/title_layout"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/putInt"
+            android:text="putInt"
+            style="@style/NormalButton"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/putFloat"
+            android:text="putFloat"
+            style="@style/NormalButton"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/putBoolean"
+            android:text="putBoolean"
+            style="@style/NormalButton"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/putString"
+            android:text="putBoolean"
+            style="@style/NormalButton"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/putSerializable"
+            android:text="putSerializable"
+            style="@style/NormalButton"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/putMulti"
+            android:text="putMulti"
+            style="@style/NormalButton"/>
+
+</LinearLayout>

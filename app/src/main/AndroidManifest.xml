@@ -30,6 +30,7 @@
         <activity android:name="luyao.util.ktx.ui.ToastExtActivity"/>
         <activity android:name="luyao.util.ktx.ui.IntentExtActivity"/>
         <activity android:name="luyao.util.ktx.ui.PermissionExtActivity"/>
+        <activity android:name="luyao.util.ktx.ui.SharedPreferencesActivity"/>
     </application>
 
 </manifest>
