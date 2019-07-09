@@ -13,11 +13,11 @@ private enum class LEVEL {
     V, D, I, W, E
 }
 
-fun String.v(tag: String = TAG, message: String) = log(LEVEL.V, tag, message)
-fun String.d(tag: String = TAG, message: String) = log(LEVEL.D, tag, message)
-fun String.i(tag: String = TAG, message: String) = log(LEVEL.I, tag, message)
-fun String.w(tag: String = TAG, message: String) = log(LEVEL.W, tag, message)
-fun String.e(tag: String = TAG, message: String) = log(LEVEL.E, tag, message)
+fun String.v(tag: String = TAG) = log(LEVEL.V, tag, this)
+fun String.d(tag: String = TAG) = log(LEVEL.D, tag, this)
+fun String.i(tag: String = TAG) = log(LEVEL.I, tag, this)
+fun String.w(tag: String = TAG) = log(LEVEL.W, tag, this)
+fun String.e(tag: String = TAG) = log(LEVEL.E, tag, this)
 
 private fun log(level: LEVEL, tag: String, message: String) {
     when (level) {

@@ -12,6 +12,7 @@ class ExtActivity : CommonListActivity() {
 
     override fun initList() {
         dataList.run {
+            add(ItemBean("ActivityExt",ActivityExtActivity::class.java))
             add(ItemBean("ToastExt", ToastExtActivity::class.java))
             add(ItemBean("AppExt", ToastExtActivity::class.java))
             add(ItemBean("IntentExt", IntentExtActivity::class.java))
