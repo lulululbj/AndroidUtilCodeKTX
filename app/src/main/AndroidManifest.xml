@@ -33,6 +33,7 @@
         <activity android:name="luyao.util.ktx.ui.SharedPreferencesActivity"/>
         <activity android:name="luyao.util.ktx.ui.ActivityExtActivity"/>
         <activity android:name="luyao.util.ktx.ui.AnotherActivity"/>
+        <activity android:name="luyao.util.ktx.ui.ListenerExtActivity"/>
     </application>
 
 </manifest>
