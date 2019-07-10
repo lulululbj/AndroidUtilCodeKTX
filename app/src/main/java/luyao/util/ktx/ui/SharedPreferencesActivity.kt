@@ -5,8 +5,8 @@ import kotlinx.android.synthetic.main.title_layout.*
 import luyao.ktx.R
 import luyao.util.ktx.base.BaseActivity
 import luyao.util.ktx.bean.Person
-import luyao.util.ktx.ext.sp.getSpValue
-import luyao.util.ktx.ext.sp.putSpValue
+import luyao.util.ktx.ext.sharedpreferences.getSpValue
+import luyao.util.ktx.ext.sharedpreferences.putSpValue
 import luyao.util.ktx.ext.toast
 
 /**

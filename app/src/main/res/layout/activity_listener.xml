@@ -11,4 +11,18 @@
             android:id="@+id/listenerEt"
             style="@style/NormalEditText"/>
 
+    <SeekBar
+            android:id="@+id/seekBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"/>
+
+    <androidx.appcompat.widget.SearchView
+            android:id="@+id/searchView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp">
+
+    </androidx.appcompat.widget.SearchView>
+
 </LinearLayout>

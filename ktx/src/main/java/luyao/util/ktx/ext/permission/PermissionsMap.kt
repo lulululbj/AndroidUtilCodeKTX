@@ -13,7 +13,7 @@ internal object PermissionsMap {
 
     fun put(callbacks: PermissionsCallback): Int {
         return atomicInteger.getAndIncrement().also {
-            map.put(it, callbacks)
+            map[it] = callbacks
         }
     }
 

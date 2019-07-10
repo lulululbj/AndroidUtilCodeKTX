@@ -1,4 +1,4 @@
-package luyao.util.ktx.ext.sp
+package luyao.util.ktx.ext.sharedpreferences
 
 import android.app.Activity
 import android.content.Context
