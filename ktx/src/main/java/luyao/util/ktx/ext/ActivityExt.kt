@@ -14,8 +14,12 @@ import java.io.Serializable
 inline fun <reified T : Activity> Activity.startKtxActivity(flags: Int? = null, extra: Bundle? = null): Unit =
     startActivity(getIntent<T>(flags, extra))
 
-inline fun <reified T : Activity> Activity.startKtxActivity(flags: Int? = null, extra: Bundle?=null,values: List<Pair<String, Any>?>?): Unit =
-    startActivity(getIntent<T>(flags, extra,values))
+inline fun <reified T : Activity> Activity.startKtxActivity(
+    flags: Int? = null,
+    extra: Bundle? = null,
+    values: List<Pair<String, Any>?>?
+): Unit =
+    startActivity(getIntent<T>(flags, extra, values))
 
 inline fun <reified T : Activity> Activity.startKtxActivityForResult(
     requestCode: Int,
@@ -30,11 +34,15 @@ inline fun <reified T : Context> Activity.getIntent(flags: Int?, extra: Bundle?)
         extra?.let { putExtras(extra) }
     }
 
-inline fun <reified T : Context> Activity.getIntent(flags: Int?, extra: Bundle?, pairs: List<Pair<String, Any>?>?): Intent =
+inline fun <reified T : Context> Activity.getIntent(
+    flags: Int?,
+    extra: Bundle?,
+    pairs: List<Pair<String, Any>?>?
+): Intent =
     Intent(this, T::class.java).apply {
         flags?.let { setFlags(flags) }
         extra?.let { putExtras(extra) }
-        if (pairs != null) {
+        pairs?.let {
             for (pair in pairs)
                 pair?.let {
                     val name = pair.first
@@ -63,7 +71,8 @@ inline fun <reified T : Context> Activity.getIntent(flags: Int?, extra: Bundle?,
                         is DoubleArray -> putExtra(name, value)
                         is Bundle -> putExtra(name, value)
                         is Intent -> putExtra(name, value)
-                        else -> {}
+                        else -> {
+                        }
                     }
                 }
         }

@@ -31,12 +31,14 @@ fun View.px2dp(px: Float): Int {
 }
 
 
-fun Context.getWidth() = resources.displayMetrics.widthPixels
+val Context.screenWidth
+    get() = resources.displayMetrics.widthPixels
 
-fun Context.getHeight() = resources.displayMetrics.heightPixels
+val Context.screenHeight
+    get() = resources.displayMetrics.heightPixels
 
-fun Context.copyToClipboard(text:String,label:String){
+fun Context.copyToClipboard(text: String, label: String) {
     val cm = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-    val clipData= ClipData.newPlainText(label,text)
-    cm.primaryClip=clipData
+    val clipData = ClipData.newPlainText(label, text)
+    cm.primaryClip = clipData
 }

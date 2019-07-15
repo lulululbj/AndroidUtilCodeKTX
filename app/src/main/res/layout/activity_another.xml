@@ -11,9 +11,4 @@
             android:text="finish"
             style="@style/NormalButton"/>
 
-    <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/finish"
-            android:text="finish"
-            style="@style/NormalButton"/>
-
 </LinearLayout>

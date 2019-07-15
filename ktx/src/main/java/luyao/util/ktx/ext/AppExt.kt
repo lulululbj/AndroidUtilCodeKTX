@@ -11,8 +11,11 @@ import java.io.File
  * on 2019/6/12 10:53
  */
 
-fun Context.getVersionName(): String = packageManager.getPackageInfo(packageName, 0).versionName
-fun Context.getVersionCode(): Int = packageManager.getPackageInfo(packageName,0).versionCode
+val Context.versionName: String
+    get() = packageManager.getPackageInfo(packageName, 0).versionName
+
+val Context.versionCode: Long
+    get() = packageManager.getPackageInfo(packageName, 0).longVersionCode
 
 fun Context.getAppInfo(apkPath: String): AppInfo {
     val packageInfo = packageManager.getPackageArchiveInfo(apkPath, PackageManager.GET_META_DATA)
@@ -34,7 +37,7 @@ fun Context.getAppInfos(apkFolderPath: String): List<AppInfo> {
     return appInfoList
 }
 
-fun Context.getAppSignature(packageName: String=this.packageName): ByteArray? {
+fun Context.getAppSignature(packageName: String = this.packageName): ByteArray? {
     val packageInfo: PackageInfo =
         packageManager.getPackageInfo(packageName, PackageManager.GET_SIGNATURES)
     val signatures = packageInfo.signatures
