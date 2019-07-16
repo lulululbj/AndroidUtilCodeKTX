@@ -30,7 +30,7 @@ fun Activity.sp(name: String = packageName, mode: Int = Context.MODE_PRIVATE): S
     getSharedPreferences(name, mode)
 
 
-fun <T> Context.putSpValue(name: String = packageName, key: String, value: T) = sp(name).edit {
+fun <T> Context.putSpValue(key: String, value: T, name: String = packageName) = sp(name).edit {
     when (value) {
         is Long -> putLong(key, value)
         is String -> putString(key, value)
@@ -52,7 +52,7 @@ fun <T> Activity.putSpValue(key: String, value: T, name: String = packageName) =
     }
 }
 
-fun <T> Context.getSpValue(key: String, default: T, name: String = packageName ): T = sp(name).run {
+fun <T> Context.getSpValue(key: String, default: T, name: String = packageName): T = sp(name).run {
     val result = when (default) {
         is Long -> getLong(key, default)
         is String -> getString(key, default)

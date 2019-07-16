@@ -5,16 +5,42 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Parcelable
+import androidx.fragment.app.Fragment
 import java.io.Serializable
 
 /**
  * Created by luyao
  * on 2019/7/9 14:17
  */
-inline fun <reified T : Activity> Activity.startKtxActivity(flags: Int? = null, extra: Bundle? = null): Unit =
+inline fun <reified T : Activity> Activity.startKtxActivity(flags: Int? = null, extra: Bundle? = null) =
     startActivity(getIntent<T>(flags, extra))
 
+inline fun <reified T : Activity> Fragment.startKtxActivity(flags: Int? = null, extra: Bundle? = null) =
+    activity?.let {
+        startActivity(activity?.getIntent<T>(flags, extra))
+    }
+
+inline fun <reified T : Activity> Context.startKtxActivity(flags: Int? = null, extra: Bundle? = null) =
+    startActivity(getIntent<T>(flags, extra))
+
+
 inline fun <reified T : Activity> Activity.startKtxActivity(
+    flags: Int? = null,
+    extra: Bundle? = null,
+    value: Pair<String, Any>?
+): Unit =
+    startActivity(getIntent<T>(flags, extra, arrayListOf(value)))
+
+inline fun <reified T : Activity> Fragment.startKtxActivity(
+    flags: Int? = null,
+    extra: Bundle? = null,
+    value: Pair<String, Any>?
+) =
+    activity?.let {
+        startActivity(activity?.getIntent<T>(flags, extra, arrayListOf(value)))
+    }
+
+inline fun <reified T : Activity> Context.startKtxActivity(
     flags: Int? = null,
     extra: Bundle? = null,
     value: Pair<String, Any>?
@@ -28,6 +54,22 @@ inline fun <reified T : Activity> Activity.startKtxActivity(
 ): Unit =
     startActivity(getIntent<T>(flags, extra, values))
 
+inline fun <reified T : Activity> Fragment.startKtxActivity(
+    flags: Int? = null,
+    extra: Bundle? = null,
+    values: List<Pair<String, Any>?>?
+) =
+    activity?.let {
+        startActivity(activity?.getIntent<T>(flags, extra, values))
+    }
+
+inline fun <reified T : Activity> Context.startKtxActivity(
+    flags: Int? = null,
+    extra: Bundle? = null,
+    values: List<Pair<String, Any>?>?
+) =
+    startActivity(getIntent<T>(flags, extra, values))
+
 inline fun <reified T : Activity> Activity.startKtxActivityForResult(
     requestCode: Int,
     flags: Int? = null,
@@ -35,13 +77,22 @@ inline fun <reified T : Activity> Activity.startKtxActivityForResult(
 ): Unit =
     startActivityForResult(getIntent<T>(flags, extra), requestCode)
 
-inline fun <reified T : Context> Activity.getIntent(flags: Int?, extra: Bundle?): Intent =
+inline fun <reified T : Activity> Fragment.startKtxActivityForResult(
+    requestCode: Int,
+    flags: Int? = null,
+    extra: Bundle? = null
+) =
+    activity?.let {
+        startActivityForResult(activity?.getIntent<T>(flags, extra), requestCode)
+    }
+
+inline fun <reified T : Context> Context.getIntent(flags: Int?, extra: Bundle?): Intent =
     Intent(this, T::class.java).apply {
         flags?.let { setFlags(flags) }
         extra?.let { putExtras(extra) }
     }
 
-inline fun <reified T : Context> Activity.getIntent(
+inline fun <reified T : Context> Context.getIntent(
     flags: Int?,
     extra: Bundle?,
     pairs: List<Pair<String, Any>?>?
@@ -84,3 +135,4 @@ inline fun <reified T : Context> Activity.getIntent(
                 }
         }
     }
+

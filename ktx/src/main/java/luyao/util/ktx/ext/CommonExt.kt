@@ -37,7 +37,7 @@ val Context.screenWidth
 val Context.screenHeight
     get() = resources.displayMetrics.heightPixels
 
-fun Context.copyToClipboard(text: String, label: String) {
+fun Context.copyToClipboard(label: String, text: String) {
     val cm = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
     val clipData = ClipData.newPlainText(label, text)
     cm.primaryClip = clipData
