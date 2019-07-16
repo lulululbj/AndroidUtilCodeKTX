@@ -17,6 +17,13 @@ inline fun <reified T : Activity> Activity.startKtxActivity(flags: Int? = null, 
 inline fun <reified T : Activity> Activity.startKtxActivity(
     flags: Int? = null,
     extra: Bundle? = null,
+    value: Pair<String, Any>?
+): Unit =
+    startActivity(getIntent<T>(flags, extra, arrayListOf(value)))
+
+inline fun <reified T : Activity> Activity.startKtxActivity(
+    flags: Int? = null,
+    extra: Bundle? = null,
     values: List<Pair<String, Any>?>?
 ): Unit =
     startActivity(getIntent<T>(flags, extra, values))

@@ -27,6 +27,11 @@
             style="@style/NormalButton"/>
 
     <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/startActivityWithMultiValue"
+            android:text="startActivityWithMultiValue"
+            style="@style/NormalButton"/>
+
+    <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/startActivityWithBundle"
             android:text="startActivityWithBundle"
             style="@style/NormalButton"/>

@@ -36,21 +36,25 @@ class ActivityExtActivity : BaseActivity() {
         }
 
         startActivityWithValue.setOnClickListener {
+            startKtxActivity<AnotherActivity>(value = "string" to "single value")
+        }
+
+        startActivityWithMultiValue.setOnClickListener {
             startKtxActivity<AnotherActivity>(
                 values = arrayListOf(
                     "int" to 1,
                     "boolean" to true,
-                    "string" to "from previous activity"
-                    )
+                    "string" to "multi value"
+                )
             )
         }
 
         startActivityWithBundle.setOnClickListener {
             startKtxActivity<AnotherActivity>(
                 extra = Bundle().apply {
-                    putInt("int",2)
-                    putBoolean("boolean",true)
-                    putString("string","from bundle")
+                    putInt("int", 2)
+                    putBoolean("boolean", true)
+                    putString("string", "from bundle")
                 }
             )
         }
