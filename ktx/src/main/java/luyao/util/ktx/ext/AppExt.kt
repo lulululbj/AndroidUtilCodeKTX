@@ -3,6 +3,7 @@ package luyao.util.ktx.ext
 import android.content.Context
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
+import android.os.Build
 import luyao.util.ktx.bean.AppInfo
 import java.io.File
 
@@ -15,7 +16,9 @@ val Context.versionName: String
     get() = packageManager.getPackageInfo(packageName, 0).versionName
 
 val Context.versionCode: Long
-    get() = packageManager.getPackageInfo(packageName, 0).longVersionCode
+    get() = with(packageManager.getPackageInfo(packageName, 0)) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) longVersionCode else versionCode.toLong()
+    }
 
 fun Context.getAppInfo(apkPath: String): AppInfo {
     val packageInfo = packageManager.getPackageArchiveInfo(apkPath, PackageManager.GET_META_DATA)

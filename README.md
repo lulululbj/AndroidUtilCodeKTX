@@ -1,8 +1,16 @@
-# AndroidUtilCodeKTX
 
-一直有关注 [Blankj](https://github.com/Blankj) 的开源项目 [AndroidUtilCode](https://github.com/Blankj/AndroidUtilCode), 到目前为止将近有 `24k` star。在以往的开发过程中，我也经常参考其中的工具类实现。但是自从切换到 `Kotlin` 作为主力开发语言以来，仍然生搬硬套其中的工具类显得并不是那么优雅，没有很好的利用 Kotlin 的语言特性，遂决定整理 `AndroidUtilCodeKTX` 这个库，完全基于 Kotlin 实现，收集 Android 开发中常用的工具类。
+**AndroidUtilCodeKTX ! 专注提升 Android 开发效率 ！**
 
-该库不会是 [AndroidUtilCode](https://github.com/Blankj/AndroidUtilCode) 的 Kotlin 翻译版本，更多的还是基于我在开发过程中的需求进行完善，由于个人精力有限，可能并不是那么完善，欢迎大家通过 [issue](https://github.com/lulululbj/AndroidUtilCodeKTX/issues) 提出自己的意见 ！
+该类库利用 Kotlin 语言特性合理封装了 Android 开发中的常用操作，同时也收集了开发过程中的常用工具类。
+旨在做同样的事情，写最少的代码，提升开发效率。
+
+## Use
+
+```
+implementation 'luyao.util.ktx:AndroidUtilKTX:0.0.5'
+```
+
+
 
 ## APIS (keep updating...)
 
@@ -89,7 +97,7 @@ Context.openApp(packageName: String)
 Context.uninstallApp(packageName: String) 
 ```
 
-### [LogExt]()
+### [LogExt](https://github.com/lulululbj/AndroidUtilCodeKTX/blob/master/ktx/src/main/java/luyao/util/ktx/ext/LogExt.kt)
 
 ```kotlin
 String.logv(tag: String = TAG)
@@ -112,7 +120,7 @@ Any.longToast(context: Context, content: String)
 Any.longToast(context: Context, @StringRes id: Int)
 ```
 
-### [SharedPreferencesExt]()
+### [SharedPreferencesExt](https://github.com/lulululbj/AndroidUtilCodeKTX/blob/master/ktx/src/main/java/luyao/util/ktx/ext/sharedpreferences/SharedPreferencesExt.kt) [[Demo]](https://github.com/lulululbj/AndroidUtilCodeKTX/blob/master/app/src/main/java/luyao/util/ktx/ui/SharedPreferencesActivity.kt)
 
 ```kotlin
 fun <T> Context.putSpValue(key: String, value: T, name: String = packageName)
@@ -121,7 +129,7 @@ fun <T> Context.getSpValue(key: String, default: T, name: String = packageName )
 fun <T> Activity.getSpValue(key: String, default: T, name: String = packageName): T
 ```
 
-### [SystemServiceExt]()
+### [SystemServiceExt](https://github.com/lulululbj/AndroidUtilCodeKTX/blob/master/ktx/src/main/java/luyao/util/ktx/ext/SystemServiceExt.kt)
 
 ```kotlin
 val Context.windowManager
@@ -157,7 +165,7 @@ val Context.jobScheduler
 ByteArray.toHexString() : 字节数组转十六进制字符串
 ```
 
-### [ViewExt]()
+### [ViewExt](https://github.com/lulululbj/AndroidUtilCodeKTX/blob/master/ktx/src/main/java/luyao/util/ktx/ext/ViewExt.kt)
 
 ```kotlin
 View.visible()
