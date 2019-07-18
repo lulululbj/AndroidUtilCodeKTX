@@ -1,6 +1,7 @@
 package luyao.util.ktx.ext
 
 import android.util.Log
+import luyao.util.ktx.BuildConfig
 
 /**
  * Created by luyao
@@ -8,6 +9,8 @@ import android.util.Log
  */
 
 const val TAG = "ktx"
+
+var showLog = BuildConfig.DEBUG
 
 private enum class LEVEL {
     V, D, I, W, E
@@ -20,6 +23,7 @@ fun String.logw(tag: String = TAG) = log(LEVEL.W, tag, this)
 fun String.loge(tag: String = TAG) = log(LEVEL.E, tag, this)
 
 private fun log(level: LEVEL, tag: String, message: String) {
+    if (!showLog) return
     when (level) {
         LEVEL.V -> Log.v(tag, message)
         LEVEL.D -> Log.d(tag, message)
