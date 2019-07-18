@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <include layout="@layout/title_layout"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/screenWidthBt"
+            android:text="width"
+            style="@style/NormalButton"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/screenHeightBt"
+            android:text="height"
+            style="@style/NormalButton"/>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <EditText
+                android:id="@+id/copyEt"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/copyBt"
+                android:text="copy "
+                android:layout_width="60dp"
+                style="@style/NormalButton"/>
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <include layout="@layout/title_layout"/>
+
+    <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/commandEt"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            style="@style/NormalEditText"
+            android:hint="Please input command"
+            android:focusable="true"
+            android:focusableInTouchMode="true"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/commandBt"
+            style="@style/NormalButton"
+            android:text="Execute"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/commandTv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="16sp"/>
+
+</LinearLayout>
