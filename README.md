@@ -10,6 +10,7 @@
 implementation 'luyao.util.ktx:AndroidUtilKTX:0.0.5'
 ```
 
+> 最新版本将第一时间用在我的另外两个开源项目，[wanandroid](https://github.com/lulululbj/wanandroid) 和 [Box](https://github.com/lulululbj/Box)，欢迎关注 ！
 
 
 ## APIS (keep updating...)
