@@ -12,7 +12,7 @@ import kotlinx.coroutines.*
  */
 open class BaseViewModel : ViewModel(), LifecycleObserver {
 
-    private val mException: MutableLiveData<Exception> = MutableLiveData()
+    val mException: MutableLiveData<Exception> = MutableLiveData()
 
 
     private fun launchOnUI(block: suspend CoroutineScope.() -> Unit) {

@@ -1,6 +1,9 @@
 package luyao.util.ktx.ui
 
 import android.Manifest
+import android.content.Context
+import android.os.PowerManager
+import android.view.WindowManager
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.files.FileFilter
 import com.afollestad.materialdialogs.files.fileChooser
@@ -45,6 +48,7 @@ class IntentExtActivity : CommonListActivity() {
 
     private fun installApk() {
 
+powerManager
         request(Manifest.permission.READ_EXTERNAL_STORAGE) {
             onGranted {
                 chooseFile()

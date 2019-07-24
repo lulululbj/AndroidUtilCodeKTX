@@ -2,7 +2,9 @@ package luyao.util.ktx.base
 
 import android.os.Bundle
 import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import java.lang.Exception
 
 /**
  * Created by luyao
@@ -28,7 +30,11 @@ abstract class BaseVMActivity<VM : BaseViewModel> : BaseActivity(),LifecycleObse
     open fun providerVMClass(): Class<VM>? = null
 
 
-    open fun startObserve() {}
+    open fun startObserve() {
+        mViewModel.mException.observe(this, Observer { it?.let { onError(it) } })
+    }
+
+    open fun onError(e: Exception){}
 
     override fun onDestroy() {
         mViewModel.let {

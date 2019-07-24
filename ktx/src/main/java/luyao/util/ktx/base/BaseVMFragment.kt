@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import java.lang.Exception
 
 /**
  * Created by luyao
@@ -26,7 +28,12 @@ abstract class BaseVMFragment<VM : BaseViewModel> : androidx.fragment.app.Fragme
         super.onViewCreated(view, savedInstanceState)
     }
 
-    open fun startObserve() {}
+    open fun startObserve() {
+        mViewModel.mException.observe(this, Observer { it?.let { onError(it) } })
+    }
+
+    open fun onError(e:Exception){}
+
     abstract fun getLayoutResId(): Int
 
     abstract fun initView()

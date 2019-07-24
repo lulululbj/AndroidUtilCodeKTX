@@ -26,7 +26,7 @@ import androidx.core.content.ContextCompat
  * Created by luyao
  * on 2019/7/9 9:17
  */
-inline fun <reified T : Any> Context.getSystemService(): T? =
+inline fun <reified T> Context.getSystemService(): T? =
     ContextCompat.getSystemService(this, T::class.java)
 
 val Context.windowManager get() = getSystemService<WindowManager>()
