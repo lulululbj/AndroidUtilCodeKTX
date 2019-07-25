@@ -19,6 +19,7 @@ import android.telephony.SubscriptionManager
 import android.telephony.TelephonyManager
 import android.view.LayoutInflater
 import android.view.WindowManager
+import android.view.accessibility.AccessibilityManager
 import android.view.inputmethod.InputMethodManager
 import androidx.core.content.ContextCompat
 
@@ -54,4 +55,5 @@ val Context.uiModeManager get() = getSystemService<UiModeManager>()
 val Context.downloadManager get() = getSystemService<DownloadManager>()
 val Context.batteryManager get() = getSystemService<BatteryManager>()
 val Context.jobScheduler get() = getSystemService<JobScheduler>()
+val Context.accessibilityManager get() = getSystemService<AccessibilityManager>()
 

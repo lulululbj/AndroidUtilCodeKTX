@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:gravity="center">
 
 
     <Button
             android:id="@+id/mvvm"
-            android:layout_width="100dp"
-            android:layout_height="80dp"
-            android:layout_centerInParent="true"
-            android:text="Click"/>
+            android:text="Click"
+            style="@style/NormalButton"/>
 
-</RelativeLayout>
+    <Button
+            android:id="@+id/error"
+            android:text="Errot Test"
+            style="@style/NormalButton"/>
+
+
+</LinearLayout>

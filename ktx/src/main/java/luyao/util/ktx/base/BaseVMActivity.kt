@@ -4,13 +4,12 @@ import android.os.Bundle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import java.lang.Exception
 
 /**
  * Created by luyao
  * on 2019/5/31 16:16
  */
-abstract class BaseVMActivity<VM : BaseViewModel> : BaseActivity(),LifecycleObserver {
+abstract class BaseVMActivity<VM : BaseViewModel> : BaseActivity(), LifecycleObserver {
 
     lateinit var mViewModel: VM
 
@@ -34,7 +33,7 @@ abstract class BaseVMActivity<VM : BaseViewModel> : BaseActivity(),LifecycleObse
         mViewModel.mException.observe(this, Observer { it?.let { onError(it) } })
     }
 
-    open fun onError(e: Exception){}
+    open fun onError(e: Throwable) {}
 
     override fun onDestroy() {
         mViewModel.let {

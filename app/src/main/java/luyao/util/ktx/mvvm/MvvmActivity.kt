@@ -19,6 +19,7 @@ class MvvmActivity : BaseVMActivity<MvvmModel>(), LifecycleOwner {
 
     override fun initView() {
         mvvm.setOnClickListener { mViewModel.getMessage() }
+        error.setOnClickListener { mViewModel.errorTest() }
     }
 
     override fun initData() {
@@ -26,6 +27,7 @@ class MvvmActivity : BaseVMActivity<MvvmModel>(), LifecycleOwner {
     }
 
     override fun startObserve() {
+        super.startObserve()
         mViewModel.run {
             mMessage.observe(this@MvvmActivity, Observer {
                 it?.run {
@@ -33,5 +35,9 @@ class MvvmActivity : BaseVMActivity<MvvmModel>(), LifecycleOwner {
                 }
             })
         }
+    }
+
+    override fun onError(e: Throwable) {
+        toast("Occur Error : ${e.message}")
     }
 }

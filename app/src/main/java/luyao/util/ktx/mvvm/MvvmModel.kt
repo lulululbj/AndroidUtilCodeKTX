@@ -24,4 +24,11 @@ class MvvmModel : BaseViewModel() {
             mMessage.value = deferred.await()
         }
     }
+
+    fun errorTest(){
+        launch {
+           val  i =1/0
+        }
+    }
+
 }

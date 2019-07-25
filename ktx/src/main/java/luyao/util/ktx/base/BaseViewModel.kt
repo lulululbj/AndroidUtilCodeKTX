@@ -12,7 +12,7 @@ import kotlinx.coroutines.*
  */
 open class BaseViewModel : ViewModel(), LifecycleObserver {
 
-    val mException: MutableLiveData<Exception> = MutableLiveData()
+    val mException: MutableLiveData<Throwable> = MutableLiveData()
 
 
     private fun launchOnUI(block: suspend CoroutineScope.() -> Unit) {
@@ -61,7 +61,7 @@ open class BaseViewModel : ViewModel(), LifecycleObserver {
         coroutineScope {
             try {
                 tryBlock()
-            } catch (e: Exception) {
+            } catch (e: Throwable) {
                 if (e !is CancellationException || handleCancellationExceptionManually) {
                     mException.value = e
                     catchBlock(e)
