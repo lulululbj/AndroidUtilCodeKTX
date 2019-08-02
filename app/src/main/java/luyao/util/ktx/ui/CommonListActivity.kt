@@ -7,7 +7,7 @@ import luyao.ktx.R
 import luyao.util.ktx.adapter.CommonAdapter
 import luyao.util.ktx.base.BaseActivity
 import luyao.util.ktx.bean.ItemBean
-import luyao.util.ktx.ext.itemPadding
+import luyao.util.ktx.ext.view.itemPadding
 
 /**
  * Created by luyao

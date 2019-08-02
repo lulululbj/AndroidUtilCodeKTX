@@ -1,13 +1,19 @@
-package luyao.util.ktx.ext
+package luyao.util.ktx.ext.view
 
 import android.graphics.Rect
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
+import luyao.util.ktx.ext.dp2px
 
 /**
  * Created by luyao
  * on 2019/6/14 14:07
  */
+
+fun RecyclerView.itemPadding(padding:Int) {
+    addItemDecoration(PaddingItemDecoration(padding, padding, padding, padding))
+}
+
 fun RecyclerView.itemPadding(top: Int, bottom: Int, left: Int = 0, right: Int = 0) {
     addItemDecoration(PaddingItemDecoration(top, bottom, left, right))
 }

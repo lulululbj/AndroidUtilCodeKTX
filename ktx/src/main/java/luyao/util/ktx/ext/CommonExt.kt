@@ -1,9 +1,10 @@
 package luyao.util.ktx.ext
 
-import android.accessibilityservice.AccessibilityServiceInfo
 import android.content.ClipData
 import android.content.Context
 import android.os.Build
+import android.provider.Settings
+import android.text.TextUtils
 import android.view.View
 
 /**
@@ -58,14 +59,19 @@ fun Context.copyToClipboard(label: String, text: String) {
     clipboardManager?.primaryClip = clipData
 }
 
-fun Context.checkAccessbilityServiceEnabled(serviceName: String): Boolean =
-    accessibilityManager.notNull({
+fun Context.checkAccessbilityServiceEnabled(serviceName: String): Boolean {
+    val settingValue =
+        Settings.Secure.getString(applicationContext.contentResolver, Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES)
+    return settingValue.notNull({
         var result = false
-        for (serviceInfo in accessibilityManager!!.getEnabledAccessibilityServiceList(AccessibilityServiceInfo.FEEDBACK_GENERIC)) {
-            if (serviceInfo.id == serviceName) {
+        val splitter = TextUtils.SimpleStringSplitter(':')
+        while (splitter.hasNext()) {
+            if (splitter.next().equals(serviceName, true)) {
                 result = true
+                break
             }
         }
         result
     }, { false })
+}
 

@@ -113,4 +113,12 @@ fun Context.uninstallApp(packageName: String) {
     }
 }
 
+fun Context.sendEmail(email: String, subject: String?, text: String?) {
+    Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:$email")).run {
+        subject?.let { putExtra(Intent.EXTRA_SUBJECT, subject) }
+        text?.let { putExtra(Intent.EXTRA_TEXT, text) }
+        startActivity(this)
+    }
+}
+
 
