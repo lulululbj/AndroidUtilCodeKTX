@@ -1,4 +1,4 @@
-package luyao.util.ktx.func
+package luyao.util.ktx.core.func
 
 import luyao.util.ktx.ext.canListFiles
 import java.io.*

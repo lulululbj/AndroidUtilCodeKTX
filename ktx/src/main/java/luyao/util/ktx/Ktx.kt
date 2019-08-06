@@ -6,8 +6,8 @@ import android.content.ContentValues
 import android.database.Cursor
 import android.net.Uri
 import androidx.lifecycle.ProcessLifecycleOwner
-import luyao.util.ktx.lifecycle.KtxLifeCycleCallBack
-import luyao.util.ktx.lifecycle.KtxLifeObserver
+import luyao.util.ktx.core.lifecycle.KtxLifeCycleCallBack
+import luyao.util.ktx.core.lifecycle.KtxLifeObserver
 
 /**
  * Created by luyao

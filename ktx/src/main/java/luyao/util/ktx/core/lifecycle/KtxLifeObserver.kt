@@ -1,4 +1,4 @@
-package luyao.util.ktx.lifecycle
+package luyao.util.ktx.core.lifecycle
 
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver

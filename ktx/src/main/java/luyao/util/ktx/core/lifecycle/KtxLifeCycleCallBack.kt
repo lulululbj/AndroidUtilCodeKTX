@@ -1,4 +1,4 @@
-package luyao.util.ktx.lifecycle
+package luyao.util.ktx.core.lifecycle
 
 import android.app.Activity
 import android.app.Application

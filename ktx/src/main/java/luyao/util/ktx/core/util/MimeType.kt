@@ -1,4 +1,4 @@
-package luyao.util.ktx.util
+package luyao.util.ktx.core.util
 
 import android.webkit.MimeTypeMap
 import java.util.*

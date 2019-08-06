@@ -7,8 +7,8 @@ import luyao.util.ktx.MainActivity
 import luyao.util.ktx.base.BaseActivity
 import luyao.util.ktx.ext.loge
 import luyao.util.ktx.ext.toast
-import luyao.util.ktx.lifecycle.KtxHandler
-import luyao.util.ktx.lifecycle.KtxManager
+import luyao.util.ktx.core.lifecycle.KtxHandler
+import luyao.util.ktx.core.lifecycle.KtxManager
 
 /**
  * Created by luyao
