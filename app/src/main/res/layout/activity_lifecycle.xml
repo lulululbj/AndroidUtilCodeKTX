@@ -4,4 +4,19 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
+    <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/currentActivityBt"
+            android:text="currentActivity"
+            style="@style/NormalButton"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/finishMainBt"
+            android:text="finishMainActivity"
+            style="@style/NormalButton"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/finishAllBt"
+            android:text="finishAllActivity"
+            style="@style/NormalButton"/>
+
 </LinearLayout>

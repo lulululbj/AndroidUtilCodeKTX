@@ -2,9 +2,8 @@
           package="luyao.util.ktx">
 
 
-    
-    <application >
-        
+    <application>
+
         <provider
                 android:authorities="${applicationId}.fileprovider"
                 android:name="androidx.core.content.FileProvider"
@@ -14,6 +13,11 @@
                     android:name="android.support.FILE_PROVIDER_PATHS"
                     android:resource="@xml/filepaths"/>
         </provider>
-        
+
+        <provider
+                android:authorities="${applicationId}.KtxInstaller"
+                android:name=".Ktx"
+                android:exported="false"/>
+
     </application>
 </manifest>

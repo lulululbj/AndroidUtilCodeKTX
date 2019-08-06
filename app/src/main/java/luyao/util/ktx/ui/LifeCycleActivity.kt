@@ -1,10 +1,14 @@
 package luyao.util.ktx.ui
 
 import android.os.Handler
+import kotlinx.android.synthetic.main.activity_lifecycle.*
 import luyao.ktx.R
+import luyao.util.ktx.MainActivity
 import luyao.util.ktx.base.BaseActivity
 import luyao.util.ktx.ext.loge
+import luyao.util.ktx.ext.toast
 import luyao.util.ktx.lifecycle.KtxHandler
+import luyao.util.ktx.lifecycle.KtxManager
 
 /**
  * Created by luyao
@@ -19,6 +23,9 @@ class LifeCycleActivity : BaseActivity() {
     }
 
     override fun initData() {
+        currentActivityBt.setOnClickListener { KtxManager.currentActivity?.let { toast(it.localClassName) } }
+        finishMainBt.setOnClickListener { KtxManager.finishActivity(MainActivity::class.java) }
+        finishAllBt.setOnClickListener { KtxManager.finishAllActivity() }
     }
 
     private val myHandler = KtxHandler(this, Handler.Callback {
