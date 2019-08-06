@@ -21,4 +21,11 @@
             android:text="扩展函数"
             android:layout_marginTop="10dp"/>
 
+    <Button
+            android:id="@+id/lifeCycleBt"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:text="LifeCycle"
+            android:layout_marginTop="10dp"/>
+
 </LinearLayout>

@@ -6,6 +6,7 @@ import luyao.util.ktx.base.BaseActivity
 import luyao.util.ktx.ext.startKtxActivity
 import luyao.util.ktx.mvvm.MvvmActivity
 import luyao.util.ktx.ui.ExtActivity
+import luyao.util.ktx.ui.LifeCycleActivity
 
 class MainActivity : BaseActivity() {
 
@@ -16,5 +17,6 @@ class MainActivity : BaseActivity() {
     override fun initData() {
         btMvvm.setOnClickListener { startKtxActivity<MvvmActivity>() }
         btExt.setOnClickListener { startKtxActivity<ExtActivity>()}
+        lifeCycleBt.setOnClickListener { startKtxActivity<LifeCycleActivity>() }
     }
 }
