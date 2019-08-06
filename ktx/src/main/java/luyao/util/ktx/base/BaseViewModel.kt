@@ -21,7 +21,7 @@ open class BaseViewModel : ViewModel(), LifecycleObserver {
 
     }
 
-    suspend fun <T> launchIO(block: suspend CoroutineScope.() -> T) {
+    suspend fun <T> launchOnIO(block: suspend CoroutineScope.() -> T) {
         withContext(Dispatchers.IO) {
             block
         }
