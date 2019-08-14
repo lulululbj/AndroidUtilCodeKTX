@@ -1,9 +1,6 @@
 package luyao.util.ktx.ui
 
 import android.Manifest
-import android.content.Context
-import android.os.PowerManager
-import android.view.WindowManager
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.files.FileFilter
 import com.afollestad.materialdialogs.files.fileChooser
@@ -24,10 +21,10 @@ class IntentExtActivity : CommonListActivity() {
             add(ItemBean("App Info", null))
             add(ItemBean("Date And Timezone", null))
             add(ItemBean("Language And Input", null))
-            add(ItemBean("Accessibility Setting",null))
+            add(ItemBean("Accessibility Setting", null))
             add(ItemBean("Install Apk", null))
-            add(ItemBean("Uninstall Apk",null))
-            add(ItemBean("Open in store",null))
+            add(ItemBean("Uninstall Apk", null))
+            add(ItemBean("Open in store", null))
             add(ItemBean("Open Browser", null))
         }
     }
@@ -48,7 +45,6 @@ class IntentExtActivity : CommonListActivity() {
 
     private fun installApk() {
 
-powerManager
         request(Manifest.permission.READ_EXTERNAL_STORAGE) {
             onGranted {
                 chooseFile()
