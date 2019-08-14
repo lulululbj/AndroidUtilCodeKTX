@@ -7,11 +7,11 @@ import android.text.style.LineHeightSpan
  * Created by luyao
  * on 2019/8/7 16:07
  */
-class KtxLineHeightSpan(val height: Int,val verticalAlignment:Int) : LineHeightSpan {
+class KtxLineHeightSpan(val height: Int, private val verticalAlignment:Int) : LineHeightSpan {
 
     companion object{
-        val ALIGN_CENTER = 2
-        val ALIGN_TOP = 3
+        const val ALIGN_CENTER = 2
+        const val ALIGN_TOP = 3
     }
 
 

@@ -27,22 +27,22 @@ fun <T> Any?.notNull(f: () -> T, t: () -> T): T {
     return if (this != null) f() else t()
 }
 
-fun Context.dp2px(dp: Float): Int {
+fun Context.dp2px(dp: Int): Int {
     val scale = resources.displayMetrics.density
     return (dp * scale + 0.5f).toInt()
 }
 
-fun Context.px2dp(px: Float): Int {
+fun Context.px2dp(px: Int): Int {
     val scale = resources.displayMetrics.density
     return (px / scale + 0.5f).toInt()
 }
 
-fun View.dp2px(dp: Float): Int {
+fun View.dp2px(dp: Int): Int {
     val scale = resources.displayMetrics.density
     return (dp * scale + 0.5f).toInt()
 }
 
-fun View.px2dp(px: Float): Int {
+fun View.px2dp(px: Int): Int {
     val scale = resources.displayMetrics.density
     return (px / scale + 0.5f).toInt()
 }

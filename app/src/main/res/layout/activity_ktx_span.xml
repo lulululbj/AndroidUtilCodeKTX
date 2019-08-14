@@ -6,12 +6,20 @@
 
     <include layout="@layout/title_layout"/>
 
-    <TextView
-            android:id="@+id/spanTv"
+    <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="5dp"
-            android:layout_marginTop="20dp"
-            android:textSize="16sp"/>
+            android:layout_height="match_parent">
+
+
+        <TextView
+                android:id="@+id/spanTv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:layout_marginTop="20dp"
+                android:textSize="16sp"/>
+
+    </ScrollView>
+
 
 </LinearLayout>

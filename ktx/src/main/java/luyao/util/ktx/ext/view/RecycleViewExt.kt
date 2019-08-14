@@ -27,9 +27,9 @@ class PaddingItemDecoration(top: Int, bottom: Int, left: Int, right: Int) : Recy
 
     override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
         super.getItemOffsets(outRect, view, parent, state)
-        outRect.bottom = view.dp2px(mBottom.toFloat())
-        outRect.top = view.dp2px(mTop.toFloat())
-        outRect.left = view.dp2px(mLeft.toFloat())
-        outRect.right = view.dp2px(mRight.toFloat())
+        outRect.bottom = view.dp2px(mBottom)
+        outRect.top = view.dp2px(mTop)
+        outRect.left = view.dp2px(mLeft)
+        outRect.right = view.dp2px(mRight)
     }
 }

@@ -8,15 +8,15 @@ import android.text.style.ReplacementSpan
  * Created by luyao
  * on 2019/8/9 16:36
  */
-class BlockLineSpan(private val mHeight: Int = 0) : ReplacementSpan() {
+class KtxBlockLineSpan(private val mHeight: Int = 0) : ReplacementSpan() {
 
 
     override fun getSize(paint: Paint, text: CharSequence?, start: Int, end: Int, fm: Paint.FontMetricsInt?): Int {
         fm?.let {
-            it.ascent = -mHeight - paint.getFontMetricsInt(it)
+            it.ascent = -mHeight
             it.top = it.ascent
-            it.descent = 0
-            it.bottom = 0
+            it.descent = -it.ascent
+            it.bottom = -it.ascent
         }
         return 0
     }
@@ -32,6 +32,5 @@ class BlockLineSpan(private val mHeight: Int = 0) : ReplacementSpan() {
         bottom: Int,
         paint: Paint
     ) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }
