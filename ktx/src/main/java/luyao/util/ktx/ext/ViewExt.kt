@@ -1,10 +1,12 @@
 package luyao.util.ktx.ext
 
 import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.drawable.BitmapDrawable
 import android.view.View
+import android.widget.ImageView
 import androidx.annotation.Px
-import androidx.core.graphics.applyCanvas
-import androidx.core.view.ViewCompat
 
 /**
  * Created by luyao
@@ -37,12 +39,36 @@ inline fun View.postDelayed(delayInMillis: Long, crossinline action: () -> Unit)
     return runnable
 }
 
-fun View.toBitmap(config: Bitmap.Config = Bitmap.Config.ARGB_8888): Bitmap {
-    if (!ViewCompat.isLaidOut(this)) {
-        throw IllegalStateException("View needs to be laid out before calling toBitmap()")
+fun View.toBitmap(scale: Float = 1f, config: Bitmap.Config = Bitmap.Config.ARGB_8888): Bitmap? {
+    if (this is ImageView) {
+        if (drawable is BitmapDrawable) return (drawable as BitmapDrawable).bitmap
     }
-    return Bitmap.createBitmap(width, height, config).applyCanvas {
-        translate(-scrollX.toFloat(), -scrollY.toFloat())
-        draw(this)
+    this.clearFocus()
+    val bitmap = createBitmapSafely((width * scale).toInt(), (height * scale).toInt(), config, 1)
+    if (bitmap != null) {
+        Canvas().run {
+            setBitmap(bitmap)
+            save()
+            drawColor(Color.WHITE)
+            scale(scale, scale)
+            this@toBitmap.draw(this)
+            restore()
+            setBitmap(null)
+        }
     }
+    return bitmap
+}
+
+fun createBitmapSafely(width: Int, height: Int, config: Bitmap.Config, retryCount: Int): Bitmap? {
+    try {
+        return Bitmap.createBitmap(width, height, config)
+    } catch (e: OutOfMemoryError) {
+        e.printStackTrace()
+        if (retryCount > 0) {
+            System.gc()
+            return createBitmapSafely(width, height, config, retryCount - 1)
+        }
+        return null
+    }
+
 }
