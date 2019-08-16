@@ -3,6 +3,7 @@ package luyao.util.ktx.base
 import android.os.Bundle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 
 /**
@@ -14,14 +15,14 @@ abstract class BaseVMActivity<VM : BaseViewModel> : BaseActivity(), LifecycleObs
     lateinit var mViewModel: VM
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        initVM()
         super.onCreate(savedInstanceState)
+        initVM()
         startObserve()
     }
 
     private fun initVM() {
         providerVMClass()?.let {
-            mViewModel = ViewModelProviders.of(this).get(it)
+            mViewModel = ViewModelProvider(this).get(it)
             mViewModel.let(lifecycle::addObserver)
         }
     }

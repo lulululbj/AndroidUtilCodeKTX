@@ -1,6 +1,5 @@
 package luyao.util.ktx.mvvm
 
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.activity_mvvm_demo.*
 import luyao.ktx.R
@@ -11,7 +10,7 @@ import luyao.util.ktx.ext.toast
  * Created by luyao
  * on 2019/5/31 16:28
  */
-class MvvmActivity : BaseVMActivity<MvvmModel>(), LifecycleOwner {
+class MvvmActivity : BaseVMActivity<MvvmModel>() {
 
     override fun providerVMClass() = MvvmModel::class.java
 

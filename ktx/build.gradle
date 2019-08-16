@@ -103,7 +103,7 @@ publish {
     userOrg = 'luyaox'           //bintray.com 注册的用户名
     groupId = 'luyao.util.ktx'   //以后访问 jcenter上此项目的路径，一般和库项目的包名一致
     artifactId = 'AndroidUtilKTX'       //bintray.com 创建的 Package 名
-    publishVersion = '0.0.5-alpha03'         //版本号
+    publishVersion = '0.0.6'         //版本号
     desc = 'Android Kotlin Util Code' //版本说明，随意
     website = 'https://github.com/lulululbj/AndroidUtilCodeKTX'    //关于这个开源项目的网站，随意
 }
