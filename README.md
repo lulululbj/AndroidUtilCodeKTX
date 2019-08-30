@@ -181,3 +181,7 @@ View.setPadding(@Px size: Int)
 View.postDelayed(delayInMillis: Long, crossinline action: () -> Unit): Runnable
 View.toBitmap(config: Bitmap.Config = Bitmap.Config.ARGB_8888): Bitmap
 ```
+
+### Others
+
+1. [KtxHandler](/ktx/src/main/java/luyao/util/ktx/core/lifecycle/KtxHandler.kt) : 跟随组件生命周期自动处理的 Handler
