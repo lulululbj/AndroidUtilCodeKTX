@@ -4,6 +4,7 @@ import kotlinx.android.synthetic.main.activity_listener.*
 import kotlinx.android.synthetic.main.title_layout.*
 import luyao.ktx.R
 import luyao.util.ktx.base.BaseActivity
+import luyao.util.ktx.ext.afterMeasured
 import luyao.util.ktx.ext.listener.onProgressBarChanged
 import luyao.util.ktx.ext.listener.queryTextListener
 import luyao.util.ktx.ext.listener.textWatcher
@@ -22,6 +23,9 @@ class ListenerExtActivity : BaseActivity() {
     }
 
     override fun initData() {
+        listenerEt.afterMeasured {
+            toast("$width $height")
+        }
         listenerEt.textWatcher {
             onTextChanged { s, _, _, _ ->
                 toast(s.toString())

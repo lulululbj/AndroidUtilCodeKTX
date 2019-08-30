@@ -4,18 +4,42 @@ import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.drawable.BitmapDrawable
+import android.os.Build
 import android.view.View
+import android.view.ViewTreeObserver
 import android.widget.ImageView
 import androidx.annotation.Px
+import androidx.annotation.RequiresApi
 
 /**
  * Created by luyao
  * on 2019/7/9 9:45
  */
-fun View.visible() = run { visibility = View.VISIBLE }
+fun View.visible() {
+    visibility = View.VISIBLE
+}
 
-fun View.invisible() = run { visibility = View.INVISIBLE }
-fun View.gone() = run { visibility = View.GONE }
+fun View.invisible() {
+    visibility = View.INVISIBLE
+}
+
+fun View.gone() {
+    visibility = View.GONE
+}
+
+fun View.reverseVisiblity(needGone: Boolean = true) {
+    if (isVisible) {
+        if (needGone) gone() else invisible()
+    } else visible()
+}
+
+fun View.changeVisible(visible: Boolean, needGone: Boolean = true) {
+    when {
+        visible -> visible()
+        needGone -> gone()
+        else -> invisible()
+    }
+}
 
 var View.isVisible: Boolean
     get() = visibility == View.VISIBLE
@@ -71,4 +95,26 @@ fun createBitmapSafely(width: Int, height: Int, config: Bitmap.Config, retryCoun
         return null
     }
 
+}
+
+inline fun View.onGlobalLayout(crossinline callback: () -> Unit) = with(viewTreeObserver) {
+    addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
+        @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
+        override fun onGlobalLayout() {
+            removeOnGlobalLayoutListener(this)
+            callback()
+        }
+    })
+}
+
+inline fun View.afterMeasured(crossinline callback: View.() -> Unit) {
+    viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
+        @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
+        override fun onGlobalLayout() {
+            if (measuredWidth > 0 && measuredHeight > 0) {
+                viewTreeObserver.removeOnGlobalLayoutListener(this)
+                callback()
+            }
+        }
+    })
 }

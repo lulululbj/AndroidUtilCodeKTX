@@ -13,7 +13,7 @@ import luyao.util.ktx.ext.toast
  * Created by luyao
  * on 2019/7/17 15:26
  */
-class CommonExtActivity  : BaseActivity() {
+class CommonExtActivity : BaseActivity() {
 
     override fun getLayoutResId() = R.layout.activity_common_ext
 
@@ -26,9 +26,9 @@ class CommonExtActivity  : BaseActivity() {
         screenHeightBt.text = "screen height : $screenHeight"
         copyBt.setOnClickListener {
             val content = copyEt.text.toString()
-            if (content.isNotEmpty()){
-                copyToClipboard("ktx",content)
-            }else {
+            if (content.isNotEmpty()) {
+                copyToClipboard(content)
+            } else {
                 toast("please input some words")
             }
         }

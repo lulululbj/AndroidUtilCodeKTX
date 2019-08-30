@@ -46,6 +46,9 @@ fun <reified T : Activity> Activity.startKtxActivityForResult(
 Fragment.startKtxActivity()
 Fragment.startKtxActivityForResult()
 Context.startKtxActivity
+Activity.hideKeyboard()
+Activity.showKeyboard(et: EditText)
+Activity.hideKeyboard(view: View)
 ```
 
 ### [AppExt](https://github.com/lulululbj/AndroidUtilCodeKTX/blob/master/ktx/src/main/java/luyao/util/ktx/ext/AppExt.kt)
@@ -56,6 +59,7 @@ Context.versionCode: Long
 Context.getAppInfo(apkPath: String): AppInfo
 Context.getAppInfos(apkFolderPath: String): List<AppInfo>
 Context.getAppSignature(packageName: String = this.packageName): ByteArray?
+Context.isPackageInstalled(pkgName: String)
 ```
 
 ### [AesExt](https://github.com/lulululbj/AndroidUtilCodeKTX/blob/master/ktx/src/main/java/luyao/util/ktx/ext/AesExt.kt)  [[Demo]](https://github.com/lulululbj/AndroidUtilCodeKTX/blob/master/ktx/src/test/java/luyao/util/ktx/ext/AesExtKtTest.kt)
@@ -91,6 +95,19 @@ Context.screenHeight
 Context.copyToClipboard(label: String, text: String)
 Context.checkAccessbilityServiceEnabled(serviceName: String)
 Any?.notNull(f: () -> T, t: () -> T): T
+Context.isRTLLayout
+```
+
+### [Constants](/ktx/src/main/java/luyao/util/ktx/core/Constants.kt)
+
+```kotlin
+fun isOnMainThread()
+```
+
+### [DrawableExt](/ktx/src/main/java/luyao/util/ktx/ext/DrawableExt.kt)
+
+```kotlin
+Drawable.convertToBitmap()
 ```
 
 ### [FileExt](/ktx/src/main/java/luyao/util/ktx/ext/FileExt.kt)
@@ -224,6 +241,7 @@ blockLine(@Px height: Int, addBlockAlways: Boolean = false)
 SearchView.queryTextListener(listener: KtxQueryTextLister.() -> Unit)
 SeekBar.onProgressBarChanged(callback: (Int, Boolean) -> Unit)
 TextView.textWatcher(watcher: KtxTextWatcher.() -> Unit)
+ViewPager.onPageSelected(pageChangedAction: (newPosition: Int) -> Unit)
 ```
 
 ### [LogExt](https://github.com/lulululbj/AndroidUtilCodeKTX/blob/master/ktx/src/main/java/luyao/util/ktx/ext/LogExt.kt)
@@ -243,6 +261,12 @@ String.loge(tag: String = TAG)
 <T> Activity.putSpValue(key: String, value: T, name: String = packageName)
 <T> Context.getSpValue(key: String, default: T, name: String = packageName ): T
 <T> Activity.getSpValue(key: String, default: T, name: String = packageName): T
+```
+
+### [StringExt](/ktx/src/main/java/luyao/util/ktx/ext/StringExt.kt)
+
+```kotlin
+String.areDigitsOnly()
 ```
 
 ### [SystemServiceExt](https://github.com/lulululbj/AndroidUtilCodeKTX/blob/master/ktx/src/main/java/luyao/util/ktx/ext/SystemServiceExt.kt)
@@ -301,6 +325,8 @@ ByteArray.toHexString() : 字节数组转十六进制字符串
 View.visible()
 View.invisible()
 View.gone()
+View.reverseVisiblity(needGone: Boolean = true)
+View.changeVisible(visible: Boolean, needGone: Boolean = true)
 var View.isVisible: Boolean
 var View.isInvisible: Boolean
 var View.isGone: Boolean
@@ -309,7 +335,9 @@ View.postDelayed(delayInMillis: Long, crossinline action: () -> Unit): Runnable
 View.toBitmap(config: Bitmap.Config = Bitmap.Config.ARGB_8888): Bitmap
 RecyclerView.itemPadding(padding:Int)
 RecyclerView.itemPadding(top: Int, bottom: Int, left: Int = 0, right: Int = 0)
-TextView.notEmpty(f: TextView.() -> Unit, t: TextView.() -> Unit) 
+TextView.notEmpty(f: TextView.() -> Unit, t: TextView.() -> Unit)
+View.onGlobalLayout(crossinline callback: () -> Unit)
+fun View.afterMeasured(crossinline callback: View.() -> Unit)
 ```
 
 ### Others

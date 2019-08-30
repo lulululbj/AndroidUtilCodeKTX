@@ -47,4 +47,13 @@ fun Context.getAppSignature(packageName: String = this.packageName): ByteArray? 
     return signatures[0].toByteArray()
 }
 
+fun Context.isPackageInstalled(pkgName: String): Boolean {
+    return try {
+        packageManager.getPackageInfo(pkgName, 0)
+        true
+    } catch (e: Exception) {
+        false
+    }
+}
+
 

@@ -12,6 +12,16 @@ import android.view.View
  * on 2019/6/14 14:23
  */
 
+val Context.isRTLLayout: Boolean get() = resources.configuration.layoutDirection == View.LAYOUT_DIRECTION_RTL
+
+val Context.screenWidth
+    get() = resources.displayMetrics.widthPixels
+
+val Context.screenHeight
+    get() = resources.displayMetrics.heightPixels
+
+
+
 fun fromM() = fromSpecificVersion(Build.VERSION_CODES.M)
 fun beforeM() = beforeSpecificVersion(Build.VERSION_CODES.M)
 fun fromN() = fromSpecificVersion(Build.VERSION_CODES.N)
@@ -47,14 +57,7 @@ fun View.px2dp(px: Int): Int {
     return (px / scale + 0.5f).toInt()
 }
 
-
-val Context.screenWidth
-    get() = resources.displayMetrics.widthPixels
-
-val Context.screenHeight
-    get() = resources.displayMetrics.heightPixels
-
-fun Context.copyToClipboard(label: String, text: String) {
+fun Context.copyToClipboard(text: String,label: String = "KTX") {
     val clipData = ClipData.newPlainText(label, text)
     clipboardManager?.primaryClip = clipData
 }

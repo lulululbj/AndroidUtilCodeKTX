@@ -1,7 +1,7 @@
 package luyao.util.ktx.ext
 
 import luyao.util.ktx.core.func.*
-import luyao.util.ktx.core.util.MimeType
+import luyao.util.ktx.core.util.getMimeType
 import java.io.File
 import java.nio.charset.Charset
 
@@ -20,7 +20,7 @@ val File.formatSize: String
     get() = getFormatFileSize(totalSize)
 
 val File.mimeType: String
-    get() = MimeType.getMimeType(extension, isDirectory)
+    get() = getMimeType(extension, isDirectory)
 
 fun File.listFiles(isRecursive: Boolean = false, filter: ((file: File) -> Boolean)? = null): Array<out File> {
     val fileList = if (!isRecursive) listFiles() else getAllSubFile(this)
