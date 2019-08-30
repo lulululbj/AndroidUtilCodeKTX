@@ -10,7 +10,7 @@ import luyao.util.ktx.ext.toast
  * Created by luyao
  * on 2019/8/6 15:10
  */
-class KtxLifeObserver : LifecycleObserver {
+class KtxAppLifeObserver : LifecycleObserver {
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     fun onForeground() {

@@ -12,90 +12,77 @@ import java.io.Serializable
  * Created by luyao
  * on 2019/7/9 14:17
  */
-inline fun <reified T : Activity> Activity.startKtxActivity(flags: Int? = null, extra: Bundle? = null) =
-    startActivity(getIntent<T>(flags, extra))
-
-inline fun <reified T : Activity> Fragment.startKtxActivity(flags: Int? = null, extra: Bundle? = null) =
-    activity?.let {
-        startActivity(activity?.getIntent<T>(flags, extra))
-    }
-
-inline fun <reified T : Activity> Context.startKtxActivity(flags: Int? = null, extra: Bundle? = null) =
-    startActivity(getIntent<T>(flags, extra))
 
 
 inline fun <reified T : Activity> Activity.startKtxActivity(
     flags: Int? = null,
     extra: Bundle? = null,
-    value: Pair<String, Any>?
-): Unit =
-    startActivity(getIntent<T>(flags, extra, arrayListOf(value)))
+    value: Pair<String, Any>? = null,
+    values: Collection<Pair<String, Any>?>? = null
+) {
+
+    val list = ArrayList<Pair<String, Any>?>()
+    value?.let { list.add(it) }
+    values?.let { list.addAll(it) }
+    startActivity(getIntent<T>(flags, extra, list))
+}
 
 inline fun <reified T : Activity> Fragment.startKtxActivity(
     flags: Int? = null,
     extra: Bundle? = null,
-    value: Pair<String, Any>?
+    value: Pair<String, Any>?,
+    values: Collection<Pair<String, Any>?>? = null
 ) =
     activity?.let {
-        startActivity(activity?.getIntent<T>(flags, extra, arrayListOf(value)))
+        val list = ArrayList<Pair<String, Any>?>()
+        value?.let { v -> list.add(v) }
+        values?.let { v -> list.addAll(v) }
+        startActivity(it.getIntent<T>(flags, extra, list))
     }
 
 inline fun <reified T : Activity> Context.startKtxActivity(
     flags: Int? = null,
     extra: Bundle? = null,
-    value: Pair<String, Any>?
-): Unit =
-    startActivity(getIntent<T>(flags, extra, arrayListOf(value)))
-
-inline fun <reified T : Activity> Activity.startKtxActivity(
-    flags: Int? = null,
-    extra: Bundle? = null,
-    values: List<Pair<String, Any>?>?
-): Unit =
-    startActivity(getIntent<T>(flags, extra, values))
-
-inline fun <reified T : Activity> Fragment.startKtxActivity(
-    flags: Int? = null,
-    extra: Bundle? = null,
-    values: List<Pair<String, Any>?>?
-) =
-    activity?.let {
-        startActivity(activity?.getIntent<T>(flags, extra, values))
-    }
-
-inline fun <reified T : Activity> Context.startKtxActivity(
-    flags: Int? = null,
-    extra: Bundle? = null,
-    values: List<Pair<String, Any>?>?
-) =
-    startActivity(getIntent<T>(flags, extra, values))
+    value: Pair<String, Any>?,
+    values: Collection<Pair<String, Any>?>? = null
+) {
+    val list = ArrayList<Pair<String, Any>?>()
+    value?.let { v -> list.add(v) }
+    values?.let { v -> list.addAll(v) }
+    startActivity(getIntent<T>(flags, extra, list))
+}
 
 inline fun <reified T : Activity> Activity.startKtxActivityForResult(
     requestCode: Int,
     flags: Int? = null,
-    extra: Bundle? = null
-): Unit =
-    startActivityForResult(getIntent<T>(flags, extra), requestCode)
+    extra: Bundle? = null,
+    value: Pair<String, Any>? = null,
+    values: Collection<Pair<String, Any>?>? = null
+) {
+    val list = ArrayList<Pair<String, Any>?>()
+    value?.let { list.add(it) }
+    values?.let { list.addAll(it) }
+    startActivityForResult(getIntent<T>(flags, extra, list), requestCode)
+}
 
 inline fun <reified T : Activity> Fragment.startKtxActivityForResult(
     requestCode: Int,
     flags: Int? = null,
-    extra: Bundle? = null
+    extra: Bundle? = null,
+    value: Pair<String, Any>? = null,
+    values: Collection<Pair<String, Any>?>? = null
 ) =
     activity?.let {
-        startActivityForResult(activity?.getIntent<T>(flags, extra), requestCode)
-    }
-
-inline fun <reified T : Context> Context.getIntent(flags: Int?, extra: Bundle?): Intent =
-    Intent(this, T::class.java).apply {
-        flags?.let { setFlags(flags) }
-        extra?.let { putExtras(extra) }
+        val list = ArrayList<Pair<String, Any>?>()
+        value?.let { list.add(it) }
+        values?.let { list.addAll(it) }
+        startActivityForResult(activity?.getIntent<T>(flags, extra, list), requestCode)
     }
 
 inline fun <reified T : Context> Context.getIntent(
-    flags: Int?,
-    extra: Bundle?,
-    pairs: List<Pair<String, Any>?>?
+    flags: Int? = null,
+    extra: Bundle? = null,
+    pairs: List<Pair<String, Any>?>? = null
 ): Intent =
     Intent(this, T::class.java).apply {
         flags?.let { setFlags(flags) }

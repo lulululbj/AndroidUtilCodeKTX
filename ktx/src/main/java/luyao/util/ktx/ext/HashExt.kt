@@ -71,13 +71,13 @@ fun File.hash(algorithm: Hash = Hash.SHA1): String {
     return ""
 }
 
-enum class Hash(algorithm: String) {
-    MD5("md5"),
-    SHA1("sha-1"),
-    SHA224("sha-224"),
-    SHA256("sha-256"),
-    SHA384("sha-384"),
-    SHA512("sha-512"),
+enum class Hash {
+    MD5,
+    SHA1,
+    SHA224,
+    SHA256,
+    SHA384,
+    SHA512,
 }
 
 

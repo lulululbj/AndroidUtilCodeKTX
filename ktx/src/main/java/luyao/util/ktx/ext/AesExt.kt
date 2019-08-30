@@ -19,22 +19,40 @@ private const val KEY_ALGORITHM = "AES"
 private const val CIPHER_ALGORITHM_DEFAULT = "AES"
 private const val AES_CFB_NOPADDING = "AES/CFB/NoPadding"
 
-fun ByteArray.aesEncrypt(key: ByteArray, iv: ByteArray, cipherAlgotirhm: String = AES_CFB_NOPADDING): ByteArray {
+fun ByteArray.aesEncrypt(
+    key: ByteArray,
+    iv: ByteArray,
+    cipherAlgotirhm: String = AES_CFB_NOPADDING
+): ByteArray {
     val cipher = initCipher(Cipher.ENCRYPT_MODE, key, iv, cipherAlgotirhm)
     return cipher.doFinal(this)
 }
 
-fun ByteArray.aesDecrypt(key: ByteArray, iv: ByteArray, cipherAlgotirhm: String = AES_CFB_NOPADDING): ByteArray {
+fun ByteArray.aesDecrypt(
+    key: ByteArray,
+    iv: ByteArray,
+    cipherAlgotirhm: String = AES_CFB_NOPADDING
+): ByteArray {
     val cipher = initCipher(Cipher.DECRYPT_MODE, key, iv, cipherAlgotirhm)
     return cipher.doFinal(this)
 }
 
-fun File.aesEncrypt(key: ByteArray, iv: ByteArray, destFilePath: String): File? {
-    return handleFile(Cipher.ENCRYPT_MODE, key, iv, path, destFilePath)
+fun File.aesEncrypt(
+    key: ByteArray,
+    iv: ByteArray,
+    destFilePath: String,
+    cipherAlgotirhm: String = AES_CFB_NOPADDING
+): File? {
+    return handleFile(Cipher.ENCRYPT_MODE, key, iv, cipherAlgotirhm, path, destFilePath)
 }
 
-fun File.aesDecrypt(key: ByteArray, iv: ByteArray, destFilePath: String): File? {
-    return handleFile(Cipher.DECRYPT_MODE, key, iv, path, destFilePath)
+fun File.aesDecrypt(
+    key: ByteArray,
+    iv: ByteArray,
+    destFilePath: String,
+    cipherAlgotirhm: String = AES_CFB_NOPADDING
+): File? {
+    return handleFile(Cipher.DECRYPT_MODE, key, iv, cipherAlgotirhm, path, destFilePath)
 }
 
 fun initAESKey(size: Int): ByteArray {
@@ -45,7 +63,7 @@ fun initAESKey(size: Int): ByteArray {
 
 private fun toKey(key: ByteArray): Key = SecretKeySpec(key, KEY_ALGORITHM)
 
-private fun initCipher(mode: Int, key: ByteArray, iv: ByteArray, cipherAlgotirhm: String): Cipher {
+fun initCipher(mode: Int, key: ByteArray, iv: ByteArray, cipherAlgotirhm: String): Cipher {
     val k = toKey(key)
     val cipher = Cipher.getInstance(cipherAlgotirhm)
     val cipherAlgorithm = cipherAlgotirhm.toUpperCase()
@@ -58,7 +76,14 @@ private fun initCipher(mode: Int, key: ByteArray, iv: ByteArray, cipherAlgotirhm
     return cipher
 }
 
-private fun handleFile(mode: Int, key: ByteArray, iv: ByteArray, sourceFilePath: String, destFilePath: String): File? {
+fun handleFile(
+    mode: Int,
+    key: ByteArray,
+    iv: ByteArray,
+    cipherAlgotirhm: String = AES_CFB_NOPADDING,
+    sourceFilePath: String,
+    destFilePath: String
+): File? {
     val sourceFile = File(sourceFilePath)
     val destFile = File(destFilePath)
 
@@ -68,7 +93,7 @@ private fun handleFile(mode: Int, key: ByteArray, iv: ByteArray, sourceFilePath:
 
         val inputStream = FileInputStream(sourceFile)
         val outputStream = FileOutputStream(destFile)
-        val cipher = initCipher(mode, key, iv, AES_CFB_NOPADDING)
+        val cipher = initCipher(mode, key, iv, cipherAlgotirhm)
         val cin = CipherInputStream(inputStream, cipher)
 
         val b = ByteArray(1024)

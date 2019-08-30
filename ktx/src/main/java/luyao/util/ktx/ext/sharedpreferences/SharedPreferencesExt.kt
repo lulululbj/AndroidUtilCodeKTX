@@ -1,3 +1,5 @@
+@file:Suppress("UNCHECKED_CAST")
+
 package luyao.util.ktx.ext.sharedpreferences
 
 import android.app.Activity

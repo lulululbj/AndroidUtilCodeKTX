@@ -7,7 +7,7 @@ import android.database.Cursor
 import android.net.Uri
 import androidx.lifecycle.ProcessLifecycleOwner
 import luyao.util.ktx.core.lifecycle.KtxLifeCycleCallBack
-import luyao.util.ktx.core.lifecycle.KtxLifeObserver
+import luyao.util.ktx.core.lifecycle.KtxAppLifeObserver
 
 /**
  * Created by luyao
@@ -31,7 +31,7 @@ class Ktx : ContentProvider() {
     private fun install(application: Application) {
         app = application
         if (watchActivityLife) application.registerActivityLifecycleCallbacks(KtxLifeCycleCallBack())
-        if (watchAppLife) ProcessLifecycleOwner.get().lifecycle.addObserver(KtxLifeObserver())
+        if (watchAppLife) ProcessLifecycleOwner.get().lifecycle.addObserver(KtxAppLifeObserver())
     }
 
     override fun insert(uri: Uri, values: ContentValues?): Uri? = null
