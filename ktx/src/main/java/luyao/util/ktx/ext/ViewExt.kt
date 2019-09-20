@@ -10,6 +10,7 @@ import android.view.ViewTreeObserver
 import android.widget.ImageView
 import androidx.annotation.Px
 import androidx.annotation.RequiresApi
+import androidx.core.view.drawToBitmap
 
 /**
  * Created by luyao
@@ -63,6 +64,7 @@ inline fun View.postDelayed(delayInMillis: Long, crossinline action: () -> Unit)
     return runnable
 }
 
+@Deprecated("use View.drawToBitmap()")
 fun View.toBitmap(scale: Float = 1f, config: Bitmap.Config = Bitmap.Config.ARGB_8888): Bitmap? {
     if (this is ImageView) {
         if (drawable is BitmapDrawable) return (drawable as BitmapDrawable).bitmap
@@ -117,4 +119,27 @@ inline fun View.afterMeasured(crossinline callback: View.() -> Unit) {
             }
         }
     })
+}
+
+var clickCount = 0
+var lastClickTime = 0L
+fun View.clickN(count: Int = 1, interval: Long = 1000, action: () -> Unit) {
+
+    setOnClickListener {
+        val currentTime = System.currentTimeMillis()
+        if (lastClickTime != 0L && (currentTime - lastClickTime > interval)) {
+            clickCount = 1
+            lastClickTime = currentTime
+            return@setOnClickListener
+        }
+
+        ++clickCount
+        lastClickTime = currentTime
+
+        if (clickCount == count) {
+            clickCount = 0
+            lastClickTime = 0L
+            action()
+        }
+    }
 }

@@ -1,11 +1,22 @@
 package luyao.util.ktx.ext
 
+import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.Canvas
+import android.graphics.PixelFormat
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
+import java.io.ByteArrayOutputStream
+
+
 /**
  * Created by luyao
  * on 2019/6/14 15:43
  */
 
-private val HEX_DIGITS = charArrayOf('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f')
+private val HEX_DIGITS =
+    charArrayOf('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f')
 
 fun ByteArray.toHexString(): String {
     val result = CharArray(size shl 1)
@@ -16,3 +27,55 @@ fun ByteArray.toHexString(): String {
     }
     return String(result)
 }
+
+fun ByteArray.toInt(): Int = TransformUtils.bytes2Int(this)
+
+fun Int.toByteArray(): ByteArray = TransformUtils.int2Bytes(this)
+
+fun ByteArray.toShort(): Short = TransformUtils.bytes2Short(this)
+
+fun Short.toByteArray(): ByteArray = TransformUtils.short2Bytes(this)
+
+fun ByteArray.toLong(): Long = TransformUtils.bytes2Long(this)
+
+fun Long.toByteArray(): ByteArray = TransformUtils.long2Bytes(this)
+
+fun Bitmap.toByteArray(format: Bitmap.CompressFormat = Bitmap.CompressFormat.PNG): ByteArray {
+    ByteArrayOutputStream().use {
+        compress(format, 100, it)
+        return toByteArray()
+    }
+}
+
+fun ByteArray.toBitmap(): Bitmap = BitmapFactory.decodeByteArray(this, 0, size)
+
+fun Drawable.toBitmap(): Bitmap {
+    if (this is BitmapDrawable) return bitmap
+
+    val bitmap = if (intrinsicHeight <= 0 || intrinsicWidth <= 0) {
+        Bitmap.createBitmap(
+            1,
+            1,
+            if (opacity != PixelFormat.OPAQUE) Bitmap.Config.ARGB_8888 else Bitmap.Config.RGB_565
+        )
+    } else {
+        Bitmap.createBitmap(
+            intrinsicWidth,
+            intrinsicHeight,
+            if (opacity != PixelFormat.OPAQUE) Bitmap.Config.ARGB_8888 else Bitmap.Config.RGB_565
+        )
+    }
+
+    val canvas = Canvas(bitmap)
+    setBounds(0, 0, canvas.width, canvas.height)
+    draw(canvas)
+    return bitmap
+}
+
+fun Bitmap.toDrawable(context: Context): Drawable = BitmapDrawable(context.resources, this)
+
+fun Drawable.toBytes(format: Bitmap.CompressFormat = Bitmap.CompressFormat.PNG): ByteArray =
+    toBitmap().toByteArray(format)
+
+fun ByteArray.toDrawable(context: Context): Drawable = toBitmap().toDrawable(context)
+

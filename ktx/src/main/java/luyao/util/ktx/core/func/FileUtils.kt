@@ -24,9 +24,9 @@ fun getFormatFileSize(size: Long, unit: Int = 1000): String {
     return when {
         size < 0 -> "0 B"
         size < unit -> "$size B"
-        size < unit * unit -> "${formatter.format(size / unit)} KB"
-        size < unit * unit * unit -> "${formatter.format(size / unit / unit)} MB"
-        else -> "${formatter.format(size / unit / unit / unit)} GB"
+        size < unit * unit -> "${formatter.format(size.toDouble() / unit)} KB"
+        size < unit * unit * unit -> "${formatter.format(size.toDouble() / unit / unit)} MB"
+        else -> "${formatter.format(size.toDouble() / unit / unit / unit)} GB"
     }
 }
 
