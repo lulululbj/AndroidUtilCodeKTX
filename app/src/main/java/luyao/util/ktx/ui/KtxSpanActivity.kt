@@ -59,7 +59,7 @@ class KtxSpanActivity : BaseActivity() {
             )
             text("前景色", foregroundColor = Color.GREEN)
             text("背景色", backgroundColor = Color.LTGRAY)
-            blockLine(spanTv.dp2px(6), true)
+            blankLine(spanTv.dp2px(6), true)
             text("行高", lineHeight = 2 * spanTv.lineHeight, backgroundColor = Color.LTGRAY)
             text(
                 "测试段落缩进，首行缩进两字，其他行不缩进，其他行不缩进",

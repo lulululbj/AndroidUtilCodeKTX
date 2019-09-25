@@ -18,6 +18,9 @@ object KtxManager {
             else mActivityList.last
 
 
+    /**
+     * push the specified [activity] into the list
+     */
     fun pushActivity(activity: Activity) {
         if (mActivityList.contains(activity)) {
             if (mActivityList.last != activity) {
@@ -29,6 +32,9 @@ object KtxManager {
         }
     }
 
+    /**
+     * pop the specified [activity] into the list
+     */
     fun popActivity(activity: Activity) {
         mActivityList.remove(activity)
     }

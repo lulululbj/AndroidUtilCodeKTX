@@ -78,8 +78,7 @@ class KtxBulletSpan : LeadingMarginSpan {
         color,
         true,
         bulletRadius
-    ) {
-    }
+    )
 
     private constructor(
         gapWidth: Int, @ColorInt color: Int, wantColor: Boolean,

@@ -20,6 +20,9 @@ val Context.versionCode: Long
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) longVersionCode else versionCode.toLong()
     }
 
+/**
+ * Return [AppInfo] by apk file path [apkPath]
+ */
 fun Context.getAppInfo(apkPath: String): AppInfo {
     val packageInfo = packageManager.getPackageArchiveInfo(apkPath, PackageManager.GET_META_DATA)
     packageInfo.applicationInfo.sourceDir = apkPath
@@ -40,6 +43,9 @@ fun Context.getAppInfos(apkFolderPath: String): List<AppInfo> {
     return appInfoList
 }
 
+/**
+ * Get app signature by [packageName]
+ */
 fun Context.getAppSignature(packageName: String = this.packageName): ByteArray? {
     val packageInfo: PackageInfo =
         packageManager.getPackageInfo(packageName, PackageManager.GET_SIGNATURES)
@@ -47,6 +53,9 @@ fun Context.getAppSignature(packageName: String = this.packageName): ByteArray? 
     return signatures[0].toByteArray()
 }
 
+/**
+ * Whether the application is installed
+ */
 fun Context.isPackageInstalled(pkgName: String): Boolean {
     return try {
         packageManager.getPackageInfo(pkgName, 0)

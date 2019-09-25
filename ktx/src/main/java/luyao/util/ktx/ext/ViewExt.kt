@@ -16,19 +16,32 @@ import androidx.core.view.drawToBitmap
  * Created by luyao
  * on 2019/7/9 9:45
  */
+
+/**
+ * Set view visible
+ */
 fun View.visible() {
     visibility = View.VISIBLE
 }
 
+/**
+ * Set view invisible
+ */
 fun View.invisible() {
     visibility = View.INVISIBLE
 }
 
+/**
+ * Set view gone
+ */
 fun View.gone() {
     visibility = View.GONE
 }
 
-fun View.reverseVisiblity(needGone: Boolean = true) {
+/**
+ * Reverse the view's visibility
+ */
+fun View.reverseVisibility(needGone: Boolean = true) {
     if (isVisible) {
         if (needGone) gone() else invisible()
     } else visible()
@@ -54,10 +67,22 @@ var View.isGone: Boolean
     get() = visibility == View.GONE
     set(value) = if (value) gone() else visible()
 
+/**
+ * Set padding
+ * @param size top, bottom, left, right padding are same
+ */
 fun View.setPadding(@Px size: Int) {
     setPadding(size, size, size, size)
 }
 
+/**
+ * Causes the Runnable which contains action() to be added to the message queue, to be run
+ * after the specified amount of time elapses.
+ * The runnable will be run on the user interface thread
+ *
+ * @param action Will be invoked in the Runnable
+ * @param delayInMillis The delay (in milliseconds) until the action() will be invoked
+ */
 inline fun View.postDelayed(delayInMillis: Long, crossinline action: () -> Unit): Runnable {
     val runnable = Runnable { action() }
     postDelayed(runnable, delayInMillis)
@@ -99,6 +124,12 @@ fun createBitmapSafely(width: Int, height: Int, config: Bitmap.Config, retryCoun
 
 }
 
+/**
+ * Register a callback to be invoked when the global layout state or the visibility of views
+ * within the view tree changes
+ *
+ * @param callback The callback() to be invoked
+ */
 inline fun View.onGlobalLayout(crossinline callback: () -> Unit) = with(viewTreeObserver) {
     addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
         @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
@@ -109,6 +140,11 @@ inline fun View.onGlobalLayout(crossinline callback: () -> Unit) = with(viewTree
     })
 }
 
+/**
+ * Register a callback to be invoked after the view is measured
+ *
+ * @param callback The callback() to be invoked
+ */
 inline fun View.afterMeasured(crossinline callback: View.() -> Unit) {
     viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
         @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
@@ -123,6 +159,11 @@ inline fun View.afterMeasured(crossinline callback: View.() -> Unit) {
 
 var clickCount = 0
 var lastClickTime = 0L
+
+/**
+ * Invoke the [action] after click [count] times.
+ * The interval between two clicks is less than [interval] mills
+ */
 fun View.clickN(count: Int = 1, interval: Long = 1000, action: () -> Unit) {
 
     setOnClickListener {

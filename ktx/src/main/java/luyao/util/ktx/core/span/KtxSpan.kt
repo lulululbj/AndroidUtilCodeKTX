@@ -26,44 +26,129 @@ class KtxSpan {
     private val LINE_SEPARATOR = System.getProperty("line.separator")
     private var mText: CharSequence = ""
 
-    // 字体大小
+    /**
+     * Set the text size to [mTextSize] physical pixels, or to [mTextSize]
+     * device-independent pixels if [mIsDp] is true.
+     */
     private var mTextSize = -1
-    private var mFontFamily = ""
-    private var mCustomTypeface: Typeface? = null
     private var mIsDp = true
+
+    /**
+     * The font family for this typeface.
+     * Examples include "monospace", "serif", and "sans-serif"
+     */
+    private var mFontFamily = ""
+
+    /**
+     * Set the custom typeface
+     */
+    private var mCustomTypeface: Typeface? = null
+
+    /**
+     * Uniformly scales the size of the text to which it's attached by a certain [mFontProportion].
+     */
     private var mFontProportion = -1f
+
+    /**
+     * Scales horizontally the size of the text to which it's attached by a certain factor.
+     * Values > 1.0 will stretch the text wider. Values < 1.0 will stretch the text narrower.
+     */
     private var mXFontProportion = -1f
+
+    /**
+     * Set the lineHeight
+     */
     private var mLineHeight = -1
+
+    /**
+     * Changes the color of the text to which the span is attached.
+     */
     private var mForegroundColor = -1
+
+    /**
+     * Changes the background color of the text to which the span is attached.
+     */
     private var mBackgroundColor = -1
-    private var mBlockLineHeight = -1
-    private var mAddBlockAlways = false
+
+    /**
+     * add blank line which height is [mBlankLineHeight] after this span
+     * if [mAddBlankLineAlways] is true , add black line for each span(not effect previous spans)
+     */
+    private var mBlankLineHeight = -1
+    private var mAddBlankLineAlways = false
+
     private var mAlignment: Layout.Alignment? = null
 
+    /**
+     * Set the style of the text it's attached to
+     */
     private var isBold = false
-    private var isStrikethrough = false
-    private var isUnderline = false
     private var isItalic = false
     private var isBoldAndItalic = false
+
+    /**
+     * Strikes through the text it's attached to
+     */
+    private var isStrikethrough = false
+
+    /**
+     * Underlines the text it's attached to
+     */
+    private var isUnderline = false
+
+    /**
+     * Move the position of the text baseline higher
+     */
     private var isSuperscript = false
+
+    /**
+     * Move the position of the text baseline lower
+     */
     private var isSubscript = false
+
+    /**
+     * Start in a new line
+     */
     private var isNewLine = true
 
-    // 段落缩进
+    /**
+     * Take separate indents for the first and subsequent lines
+     *
+     * [mFirst] is the indent for the first line of the paragraph
+     * [mRest] is the indent for the remaining lines of the paragraph
+     */
     private var mFirst = 0
     private var mRest = 0
 
-    // 注释
+    /**
+     * Creates a [KtxQuoteSpan] based on a color, a stripe width and the width of the gap
+     * between the stripe and the text.
+     *
+     * [mQuoteColor]       the color of the quote stripe.
+     * [mQuoteStripeWidth] the width of the stripe.
+     * [mQuoteGapWidth]    the width of the gap between the stripe and the text.
+     */
     private var mQuoteColor = -1
     private var mQuoteStripeWidth = STANDARD_STRIPE_WIDTH_PX
     private var mQuoteGapWidth = STANDARD_GAP_WIDTH_PX
 
-    // bullet
+    /**
+     * Creates a [KtxBulletSpan] based on a gap width and a color integer.
+     *
+     * [mBulletGapWidth]     the distance, in pixels, between the bullet point and the paragraph.
+     * [mBulletColor]        the bullet point color, as a color integer.
+     * [mBulletRadius] the radius of the bullet point, in pixels.
+     */
     private var mBulletColor = -1
     private var mBulletRadius = STANDARD_BULLET_RADIUS
     private var mBulletGapWidth = STANDARD_GAP_WIDTH_PX
 
-    // blur
+    /**
+     * Create a [BlurMaskFilter]
+     *
+     * [mBlurRadius] The radius to extend the blur from the original mask. Must be > 0.
+     * [mBlurStyle] The Blur to use
+     */
     private var mBlurRadius = -1f
     private var mBlurStyle: BlurMaskFilter.Blur = BlurMaskFilter.Blur.NORMAL
 
@@ -178,17 +263,17 @@ class KtxSpan {
         }
     }
 
-    fun blockLine(@Px height: Int, addBlockAlways: Boolean = false) {
+    fun blankLine(@Px height: Int, addBlankLineAlways: Boolean = false) {
         mText = "[space]$LINE_SEPARATOR"
         val start = mSpanBuilder.length
         mSpanBuilder.append(mText)
         val end = mSpanBuilder.length
 
-        mBlockLineHeight = height
-        mAddBlockAlways = addBlockAlways
+        mBlankLineHeight = height
+        mAddBlankLineAlways = addBlankLineAlways
 
-        if (mBlockLineHeight > -1) {
-            mSpanBuilder.setSpan(KtxBlockLineSpan(mBlockLineHeight), start, end, Spannable.SPAN_INCLUSIVE_EXCLUSIVE)
+        if (mBlankLineHeight > -1) {
+            mSpanBuilder.setSpan(KtxBlockLineSpan(mBlankLineHeight), start, end, Spannable.SPAN_INCLUSIVE_EXCLUSIVE)
         }
     }
 
@@ -273,8 +358,8 @@ class KtxSpan {
         if (isSubscript)
             mSpanBuilder.setSpan(SubscriptSpan(), start, end, mFlag)
 
-        if (mAddBlockAlways && isNewLine)
-            blockLine(mBlockLineHeight, mAddBlockAlways)
+        if (mAddBlankLineAlways && isNewLine)
+            blankLine(mBlankLineHeight, mAddBlankLineAlways)
 
     }
 

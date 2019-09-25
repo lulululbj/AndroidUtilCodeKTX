@@ -19,43 +19,72 @@ private const val KEY_ALGORITHM = "AES"
 private const val CIPHER_ALGORITHM_DEFAULT = "AES"
 private const val AES_CFB_NOPADDING = "AES/CFB/NoPadding"
 
+/**
+ * Aes encrypt byte array
+ * @param key the encryption key
+ * @param iv the IV (CFB,CBC,CTR need IV)
+ * @param algorithm the algorithm parameters
+ */
 fun ByteArray.aesEncrypt(
     key: ByteArray,
-    iv: ByteArray,
-    cipherAlgotirhm: String = AES_CFB_NOPADDING
+    iv: ByteArray? = null,
+    algorithm: String = AES_CFB_NOPADDING
 ): ByteArray {
-    val cipher = initCipher(Cipher.ENCRYPT_MODE, key, iv, cipherAlgotirhm)
+    val cipher = initCipher(Cipher.ENCRYPT_MODE, key, iv, algorithm)
     return cipher.doFinal(this)
 }
 
+/**
+ * Aes decrypt byte array
+ * @param key the decryption key
+ * @param iv the IV (CFB,CBC,CTR need IV)
+ * @param algorithm the algorithm parameters
+ */
 fun ByteArray.aesDecrypt(
     key: ByteArray,
-    iv: ByteArray,
-    cipherAlgotirhm: String = AES_CFB_NOPADDING
+    iv: ByteArray? = null,
+    algorithm: String = AES_CFB_NOPADDING
 ): ByteArray {
-    val cipher = initCipher(Cipher.DECRYPT_MODE, key, iv, cipherAlgotirhm)
+    val cipher = initCipher(Cipher.DECRYPT_MODE, key, iv, algorithm)
     return cipher.doFinal(this)
 }
 
+/**
+ * Aes encrypt file
+ * @param key the encryption key
+ * @param iv the IV (CFB,CBC,CTR need IV)
+ * @param destFilePath dest encrypted file
+ * @param algorithm the algorithm parameters
+ */
 fun File.aesEncrypt(
     key: ByteArray,
     iv: ByteArray,
     destFilePath: String,
-    cipherAlgotirhm: String = AES_CFB_NOPADDING
+    algorithm: String = AES_CFB_NOPADDING
 ): File? {
-    return handleFile(Cipher.ENCRYPT_MODE, key, iv, cipherAlgotirhm, path, destFilePath)
+    return handleFile(Cipher.ENCRYPT_MODE, key, iv, algorithm, path, destFilePath)
 }
 
+/**
+ * Aes decrypt file
+ * @param key the decryption key
+ * @param iv the IV (CFB,CBC,CTR need IV)
+ * @param destFilePath dest decrypted file
+ * @param algorithm the algorithm parameters
+ */
 fun File.aesDecrypt(
     key: ByteArray,
     iv: ByteArray,
     destFilePath: String,
-    cipherAlgotirhm: String = AES_CFB_NOPADDING
+    algorithm: String = AES_CFB_NOPADDING
 ): File? {
-    return handleFile(Cipher.DECRYPT_MODE, key, iv, cipherAlgotirhm, path, destFilePath)
+    return handleFile(Cipher.DECRYPT_MODE, key, iv, algorithm, path, destFilePath)
 }
 
-fun initAESKey(size: Int): ByteArray {
+/**
+ * Generate aes key byte array , default size is 128
+ */
+fun initAESKey(size: Int = 128): ByteArray {
     val kg = KeyGenerator.getInstance(KEY_ALGORITHM)
     kg.init(size)
     return kg.generateKey().encoded
@@ -63,10 +92,17 @@ fun initAESKey(size: Int): ByteArray {
 
 private fun toKey(key: ByteArray): Key = SecretKeySpec(key, KEY_ALGORITHM)
 
-fun initCipher(mode: Int, key: ByteArray, iv: ByteArray, cipherAlgotirhm: String): Cipher {
+/**
+ * Init Cipher
+ * @param mode the operation mode of this cipher
+ * @param key the encrypt/decrypt key
+ * @param iv the IV
+ * @param algorithm the algorithm parameters
+ */
+fun initCipher(mode: Int, key: ByteArray, iv: ByteArray? = null, algorithm: String): Cipher {
     val k = toKey(key)
-    val cipher = Cipher.getInstance(cipherAlgotirhm)
-    val cipherAlgorithm = cipherAlgotirhm.toUpperCase()
+    val cipher = Cipher.getInstance(algorithm)
+    val cipherAlgorithm = algorithm.toUpperCase()
     if (cipherAlgorithm.contains("CFB") || cipherAlgorithm.contains("CBC")
         || cipherAlgorithm.contains("CTR")
     )
@@ -76,11 +112,11 @@ fun initCipher(mode: Int, key: ByteArray, iv: ByteArray, cipherAlgotirhm: String
     return cipher
 }
 
-fun handleFile(
+private fun handleFile(
     mode: Int,
     key: ByteArray,
     iv: ByteArray,
-    cipherAlgotirhm: String = AES_CFB_NOPADDING,
+    cipherAlgorithm: String = AES_CFB_NOPADDING,
     sourceFilePath: String,
     destFilePath: String
 ): File? {
@@ -93,7 +129,7 @@ fun handleFile(
 
         val inputStream = FileInputStream(sourceFile)
         val outputStream = FileOutputStream(destFile)
-        val cipher = initCipher(mode, key, iv, cipherAlgotirhm)
+        val cipher = initCipher(mode, key, iv, cipherAlgorithm)
         val cin = CipherInputStream(inputStream, cipher)
 
         val b = ByteArray(1024)

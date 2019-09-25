@@ -17,8 +17,8 @@ class AesExtKtTest {
 
     @Before
     fun setUp() {
-        key = initAESKey(128)
-        iv = initAESKey(128)
+        key = initAESKey()
+        iv = initAESKey()
     }
 
     @Test
@@ -38,8 +38,9 @@ class AesExtKtTest {
 
     @Test
     fun aesECB() {
-        val byteEncrypt = plainText.toByteArray().aesEncrypt(key, iv, "AES/ECB/PKCS5Padding")
-        val byteDecrypt = byteEncrypt.aesDecrypt(key, iv, "AES/ECB/PKCS5Padding")
+        val byteEncrypt =
+            plainText.toByteArray().aesEncrypt(key, algorithm = "AES/ECB/PKCS5Padding")
+        val byteDecrypt = byteEncrypt.aesDecrypt(key, algorithm = "AES/ECB/PKCS5Padding")
         assertEquals(plainText, String(byteDecrypt))
     }
 

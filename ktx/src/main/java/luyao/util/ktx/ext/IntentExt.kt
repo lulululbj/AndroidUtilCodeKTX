@@ -14,7 +14,9 @@ import java.io.File
  * on 2019/6/17 9:09
  */
 
-
+/**
+ * Return the Intent with [Settings.ACTION_APPLICATION_DETAILS_SETTINGS]
+ */
 fun Context.getAppInfoIntent(packageName: String = this.packageName): Intent =
     Intent(
         Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
@@ -23,11 +25,16 @@ fun Context.getAppInfoIntent(packageName: String = this.packageName): Intent =
         addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
     }
 
-/** 跳转到应用信息页面 */
+/**
+ * Jump to the app info page
+ */
 fun Context.goToAppInfoPage(packageName: String = this.packageName) {
     startActivity(getAppInfoIntent(packageName))
 }
 
+/**
+ * Return the Intent with [Settings.ACTION_DATE_SETTINGS]
+ */
 fun Context.getDateAndTimeIntent(): Intent =
     Intent(Settings.ACTION_DATE_SETTINGS).apply {
         flags = Intent.FLAG_ACTIVITY_NEW_TASK
@@ -35,12 +42,15 @@ fun Context.getDateAndTimeIntent(): Intent =
     }
 
 /**
- * 跳转到日期和时间页面
+ * Jump to the data and time page
  */
 fun Context.goToDateAndTimePage() {
     startActivity(getDateAndTimeIntent())
 }
 
+/**
+ * Return the Intent with [Settings.ACTION_LOCALE_SETTINGS]
+ */
 fun Context.getLanguageIntent() =
     Intent(Settings.ACTION_LOCALE_SETTINGS).apply {
         flags = Intent.FLAG_ACTIVITY_NEW_TASK
@@ -48,12 +58,15 @@ fun Context.getLanguageIntent() =
     }
 
 /**
- * 跳转到语言设置页面
+ * Jump to the language page
  */
 fun Context.goToLanguagePage() {
     startActivity(getLanguageIntent())
 }
 
+/**
+ * Return the Intent for install apk
+ */
 fun Context.getInstallIntent(apkFile: File): Intent? {
     if (!apkFile.exists()) return null
     val intent = Intent(Intent.ACTION_VIEW)
@@ -71,24 +84,33 @@ fun Context.getInstallIntent(apkFile: File): Intent? {
     return intent
 }
 
-/** 跳转到无障碍服务设置页面 */
-fun Context.goToAccessibilitySetting() = Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS).run { startActivity(this) }
+/**
+ * Jump to the accessibility page
+ */
+fun Context.goToAccessibilitySetting() =
+    Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS).run { startActivity(this) }
 
 
 /**
- * need android.permission.REQUEST_INSTALL_PACKAGES after N
+ * install apk
+ * @note need android.permission.REQUEST_INSTALL_PACKAGES after N
  */
 fun Context.installApk(apkFile: File) {
     val intent = getInstallIntent(apkFile)
     intent?.run { startActivity(this) }
 }
 
-/** 浏览器打开指定网页 */
+/**
+ * Visit the specific url with browser
+ */
 fun Context.openBrowser(url: String) {
     Intent(Intent.ACTION_VIEW, Uri.parse(url)).run { startActivity(this) }
 }
 
-/** 在应用商店中打开应用 */
+/**
+ * Visit app in app store
+ * @param packageName default value is current app
+ */
 fun Context.openInAppStore(packageName: String = this.packageName) {
     val intent = Intent(Intent.ACTION_VIEW)
     try {
@@ -101,11 +123,15 @@ fun Context.openInAppStore(packageName: String = this.packageName) {
     }
 }
 
-/** 启动 app */
+/**
+ * Open app by [packageName]
+ */
 fun Context.openApp(packageName: String) =
     packageManager.getLaunchIntentForPackage(packageName)?.run { startActivity(this) }
 
-/** 卸载 app */
+/**
+ * Uninstall app by [packageName]
+ */
 fun Context.uninstallApp(packageName: String) {
     Intent(Intent.ACTION_DELETE).run {
         data = Uri.parse("package:$packageName")
@@ -113,6 +139,12 @@ fun Context.uninstallApp(packageName: String) {
     }
 }
 
+/**
+ * Send email
+ * @param email the email address be sent to
+ * @param subject a constant string holding the desired subject line of a message, @see [Intent.EXTRA_SUBJECT]
+ * @param text a constant CharSequence that is associated with the Intent, @see [Intent.EXTRA_TEXT]
+ */
 fun Context.sendEmail(email: String, subject: String?, text: String?) {
     Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:$email")).run {
         subject?.let { putExtra(Intent.EXTRA_SUBJECT, subject) }

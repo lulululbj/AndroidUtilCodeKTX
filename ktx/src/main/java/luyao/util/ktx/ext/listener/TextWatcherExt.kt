@@ -9,6 +9,9 @@ import android.widget.TextView
  * on 2019/7/9 16:13
  */
 
+/**
+ * Add a DSL listener to simplify [TextView.addTextChangedListener]
+ */
 fun TextView.textWatcher(watcher: KtxTextWatcher.() -> Unit) =
     addTextChangedListener(KtxTextWatcher().apply(watcher))
 

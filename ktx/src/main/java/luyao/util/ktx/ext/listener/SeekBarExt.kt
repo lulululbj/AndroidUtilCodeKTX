@@ -6,10 +6,15 @@ import android.widget.SeekBar
  * Created by luyao
  * on 2019/7/10 16:28
  */
-fun SeekBar.onProgressBarChanged(callback: (Int, Boolean) -> Unit) {
+
+/**
+ * Add an action which will be invoked when the SeekBar onProgressChanged
+ * @see SeekBar.setOnSeekBarChangeListener
+ */
+fun SeekBar.onProgressBarChanged(action: (Int, Boolean) -> Unit) {
     setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
         override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-            callback(progress, fromUser)
+            action(progress, fromUser)
         }
 
         override fun onStartTrackingTouch(seekBar: SeekBar?) {

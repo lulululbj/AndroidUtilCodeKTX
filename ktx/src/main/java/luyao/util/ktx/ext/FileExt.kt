@@ -13,16 +13,33 @@ import java.nio.charset.Charset
 val File.canListFiles: Boolean
     get() = canRead() and isDirectory
 
+/**
+ * Total size (include all subFile)
+ */
 val File.totalSize: Long
     get() = if (isFile) length() else getFolderSize(this)
 
+/**
+ * Formatted total size (include all subFile)
+ */
 val File.formatSize: String
     get() = getFormatFileSize(totalSize)
 
+/**
+ * Return file's mimeType, such as "png"
+ */
 val File.mimeType: String
     get() = getMimeType(extension, isDirectory)
 
-fun File.listFiles(isRecursive: Boolean = false, filter: ((file: File) -> Boolean)? = null): Array<out File> {
+/**
+ * List sub files
+ * @param isRecursive whether to list recursively
+ * @param filter exclude some files
+ */
+fun File.listFiles(
+    isRecursive: Boolean = false,
+    filter: ((file: File) -> Boolean)? = null
+): Array<out File> {
     val fileList = if (!isRecursive) listFiles() else getAllSubFile(this)
     var result: Array<File> = arrayOf()
     return if (filter == null) fileList
@@ -34,18 +51,28 @@ fun File.listFiles(isRecursive: Boolean = false, filter: ((file: File) -> Boolea
     }
 }
 
+/**
+ * write some text to file
+ * @param append whether to append or overwrite
+ * @param charset default charset is utf-8
+ */
 fun File.writeText(append: Boolean = false, text: String, charset: Charset = Charsets.UTF_8) {
     if (append) appendText(text, charset) else writeText(text, charset)
 }
 
+/**
+ * write some bytes to file
+ * @param append whether to append or overwrite
+ */
 fun File.writeBytes(append: Boolean = false, bytes: ByteArray) {
     if (append) appendBytes(bytes) else writeBytes(bytes)
 }
 
 /**
- *   [destFile] dest file/folder
- *   [overwrite] whether to override dest file/folder if exist
- *   [reserve] Whether to reserve source file/folder
+ *  copy file
+ *  @param destFile dest file/folder
+ *  @param overwrite whether to override dest file/folder if exist
+ *  @param reserve Whether to reserve source file/folder
  */
 fun File.moveTo(destFile: File, overwrite: Boolean = true, reserve: Boolean = true): Boolean {
     val dest = copyRecursively(destFile, overwrite)
@@ -54,9 +81,10 @@ fun File.moveTo(destFile: File, overwrite: Boolean = true, reserve: Boolean = tr
 }
 
 /**
- *   [destFolder] dest folder
- *   [overwrite] whether to override dest file/folder if exist
- *   [func] progress callback (from 0 to 100)
+ * copy file with progress callback
+ * @param destFolder dest folder
+ * @param overwrite whether to override dest file/folder if exist
+ * @param func progress callback (from 0 to 100)
  */
 fun File.moveToWithProgress(
     destFolder: File,
@@ -71,12 +99,10 @@ fun File.moveToWithProgress(
     if (!reserve) deleteRecursively()
 }
 
+/** Rename to newName */
 fun File.rename(newName: String) =
     rename(File("$parent${File.separator}$newName"))
 
+/** Rename to newFile's name */
 fun File.rename(newFile: File) =
     if (newFile.exists()) false else renameTo(newFile)
-
-// 获取内部存储容量，可用，已用空间
-// getCharset
-// 文件名冲突

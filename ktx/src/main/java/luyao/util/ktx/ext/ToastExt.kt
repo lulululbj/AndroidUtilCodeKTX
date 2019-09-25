@@ -11,7 +11,7 @@ import androidx.annotation.StringRes
 
 
 fun Context.toast(content: String, duration: Int = Toast.LENGTH_SHORT) {
-    Toast.makeText(this.applicationContext, content, duration).apply {
+    Toast.makeText(this, content, duration).apply {
         show()
     }
 }

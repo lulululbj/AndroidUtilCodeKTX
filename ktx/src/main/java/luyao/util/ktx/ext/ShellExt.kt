@@ -7,6 +7,10 @@ import java.io.InputStreamReader
  * Created by luyao
  * on 2019/7/18 15:49
  */
+
+/**
+ * Return the result of executed the [command] in the shell
+ */
 fun executeCmd(command: String): String {
     val process = Runtime.getRuntime().exec(command)
 

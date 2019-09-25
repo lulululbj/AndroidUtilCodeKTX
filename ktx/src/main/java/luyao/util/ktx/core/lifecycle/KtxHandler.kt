@@ -7,6 +7,7 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.OnLifecycleEvent
 
 /**
+ * A custom Handler attached with the LifeCycle
  * Created by luyao
  * on 2019/8/6 9:34
  */

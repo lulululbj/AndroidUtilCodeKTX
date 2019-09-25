@@ -10,10 +10,17 @@ import luyao.util.ktx.ext.dp2px
  * on 2019/6/14 14:07
  */
 
+/**
+ * Add item padding
+ * @param padding the top, bottom, left, right is same
+ */
 fun RecyclerView.itemPadding(padding:Int) {
     addItemDecoration(PaddingItemDecoration(padding, padding, padding, padding))
 }
 
+/**
+ * Add item padding for top, bottom, left, right
+ */
 fun RecyclerView.itemPadding(top: Int, bottom: Int, left: Int = 0, right: Int = 0) {
     addItemDecoration(PaddingItemDecoration(top, bottom, left, right))
 }

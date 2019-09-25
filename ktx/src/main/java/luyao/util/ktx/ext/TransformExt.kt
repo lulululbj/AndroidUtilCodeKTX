@@ -18,6 +18,9 @@ import java.io.ByteArrayOutputStream
 private val HEX_DIGITS =
     charArrayOf('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f')
 
+/**
+ * byte array to hex string
+ */
 fun ByteArray.toHexString(): String {
     val result = CharArray(size shl 1)
     var index = 0
@@ -28,18 +31,39 @@ fun ByteArray.toHexString(): String {
     return String(result)
 }
 
+/**
+ * byte array to int
+ */
 fun ByteArray.toInt(): Int = TransformUtils.bytes2Int(this)
 
+/**
+ * int to byte array
+ */
 fun Int.toByteArray(): ByteArray = TransformUtils.int2Bytes(this)
 
+/**
+ * byte array to short
+ */
 fun ByteArray.toShort(): Short = TransformUtils.bytes2Short(this)
 
+/**
+ * short to byte array
+ */
 fun Short.toByteArray(): ByteArray = TransformUtils.short2Bytes(this)
 
+/**
+ * byte array to long
+ */
 fun ByteArray.toLong(): Long = TransformUtils.bytes2Long(this)
 
+/**
+ * long to byte array
+ */
 fun Long.toByteArray(): ByteArray = TransformUtils.long2Bytes(this)
 
+/**
+ * bitmap to byte array
+ */
 fun Bitmap.toByteArray(format: Bitmap.CompressFormat = Bitmap.CompressFormat.PNG): ByteArray {
     ByteArrayOutputStream().use {
         compress(format, 100, it)
@@ -47,8 +71,14 @@ fun Bitmap.toByteArray(format: Bitmap.CompressFormat = Bitmap.CompressFormat.PNG
     }
 }
 
+/**
+ * byte array to bitmap
+ */
 fun ByteArray.toBitmap(): Bitmap = BitmapFactory.decodeByteArray(this, 0, size)
 
+/**
+ * drawable to bitmap
+ */
 fun Drawable.toBitmap(): Bitmap {
     if (this is BitmapDrawable) return bitmap
 
@@ -72,10 +102,19 @@ fun Drawable.toBitmap(): Bitmap {
     return bitmap
 }
 
+/**
+ * bitmap to drawable
+ */
 fun Bitmap.toDrawable(context: Context): Drawable = BitmapDrawable(context.resources, this)
 
-fun Drawable.toBytes(format: Bitmap.CompressFormat = Bitmap.CompressFormat.PNG): ByteArray =
+/**
+ * drawable to byte array
+ */
+fun Drawable.toByteArray(format: Bitmap.CompressFormat = Bitmap.CompressFormat.PNG): ByteArray =
     toBitmap().toByteArray(format)
 
+/**
+ * byte array to drawable
+ */
 fun ByteArray.toDrawable(context: Context): Drawable = toBitmap().toDrawable(context)
 

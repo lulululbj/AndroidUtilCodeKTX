@@ -10,6 +10,9 @@ import java.text.DecimalFormat
  * on 2019/7/23 9:29
  */
 
+/**
+ * Return the file size, include all sub files
+ */
 fun getFolderSize(file: File): Long {
     var total = 0L
     for (subFile in file.listFiles()) {
@@ -19,6 +22,10 @@ fun getFolderSize(file: File): Long {
     return total
 }
 
+/**
+ * Return the formatted file size, like "4.78 GB"
+ * @param unit 1000 or 1024, default to 1000
+ */
 fun getFormatFileSize(size: Long, unit: Int = 1000): String {
     val formatter = DecimalFormat("####.00")
     return when {
@@ -30,7 +37,9 @@ fun getFormatFileSize(size: Long, unit: Int = 1000): String {
     }
 }
 
-
+/**
+ * Return all subFile in the folder
+ */
 fun getAllSubFile(folder: File): Array<File> {
     var fileList: Array<File> = arrayOf()
     if (!folder.canListFiles) return fileList
@@ -40,6 +49,10 @@ fun getAllSubFile(folder: File): Array<File> {
     return fileList
 }
 
+/**
+ * copy the [sourceFile] to the [destFile], only for file, not for folder
+ * @param overwrite if the destFile is exist, whether to overwrite it
+ */
 fun copyFile(sourceFile: File, destFile: File, overwrite: Boolean, func: ((file: File, i: Int) -> Unit)? = null) {
 
     if (!sourceFile.exists()) return
@@ -87,6 +100,10 @@ fun copyFile(sourceFile: File, destFile: File, overwrite: Boolean, func: ((file:
     outputStream.close()
 }
 
+/**
+ * copy the [sourceFolder] to the [destFolder]
+ * @param overwrite if the destFile is exist, whether to overwrite it
+ */
 fun copyFolder(sourceFolder: File, destFolder: File, overwrite: Boolean, func: ((file: File, i: Int) -> Unit)? = null) {
     if (!sourceFolder.exists()) return
 

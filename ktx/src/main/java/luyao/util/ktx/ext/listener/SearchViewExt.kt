@@ -6,6 +6,10 @@ import androidx.appcompat.widget.SearchView
  * Created by luyao
  * on 2019/7/10 16:39
  */
+
+/**
+ * add a DSL listener to simplify [SearchView.setOnQueryTextFocusChangeListener]
+ */
 fun SearchView.queryTextListener(listener: KtxQueryTextLister.() -> Unit) {
     setOnQueryTextListener(KtxQueryTextLister().apply(listener))
 }

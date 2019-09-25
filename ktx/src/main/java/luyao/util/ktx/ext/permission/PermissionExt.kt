@@ -14,10 +14,17 @@ import androidx.fragment.app.FragmentActivity
 
 const val TAG ="ktx"
 
+/**
+ * request permissions list in [permissions]
+ */
 fun FragmentActivity.request(vararg permissions: String) {
     ActivityCompat.requestPermissions(this, permissions, 0XFF)
 }
 
+/**
+ * request permissions list in [permissions]
+ * @param callbacks DSL callback to handle request result
+ */
 fun FragmentActivity.request(vararg permissions: String, callbacks: PermissionsCallbackDSL.() -> Unit) {
 
     val permissionsCallback = PermissionsCallbackDSL().apply { callbacks() }
