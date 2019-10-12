@@ -34,7 +34,7 @@ inline fun <reified T : Activity> Activity.startKtxActivity(
 inline fun <reified T : Activity> Fragment.startKtxActivity(
     flags: Int? = null,
     extra: Bundle? = null,
-    value: Pair<String, Any>?,
+    value: Pair<String, Any>? = null,
     values: Collection<Pair<String, Any>?>? = null
 ) =
     activity?.let {
@@ -47,7 +47,7 @@ inline fun <reified T : Activity> Fragment.startKtxActivity(
 inline fun <reified T : Activity> Context.startKtxActivity(
     flags: Int? = null,
     extra: Bundle? = null,
-    value: Pair<String, Any>?,
+    value: Pair<String, Any>? = null,
     values: Collection<Pair<String, Any>?>? = null
 ) {
     val list = ArrayList<Pair<String, Any>?>()
