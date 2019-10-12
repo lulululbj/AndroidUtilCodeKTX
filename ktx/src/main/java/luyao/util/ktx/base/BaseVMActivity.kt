@@ -1,6 +1,7 @@
 package luyao.util.ktx.base
 
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -10,7 +11,7 @@ import androidx.lifecycle.ViewModelProviders
  * Created by luyao
  * on 2019/5/31 16:16
  */
-abstract class BaseVMActivity<VM : BaseViewModel> : BaseActivity(), LifecycleObserver {
+abstract class BaseVMActivity<VM : BaseViewModel> : AppCompatActivity(), LifecycleObserver {
 
     lateinit var mViewModel: VM
 
@@ -18,7 +19,14 @@ abstract class BaseVMActivity<VM : BaseViewModel> : BaseActivity(), LifecycleObs
         super.onCreate(savedInstanceState)
         initVM()
         startObserve()
+        setContentView(getLayoutResId())
+        initView()
+        initData()
     }
+
+    abstract fun getLayoutResId(): Int
+    abstract fun initView()
+    abstract fun initData()
 
     private fun initVM() {
         providerVMClass()?.let {
