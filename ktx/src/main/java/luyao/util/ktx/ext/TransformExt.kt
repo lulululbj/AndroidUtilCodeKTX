@@ -8,6 +8,7 @@ import android.graphics.PixelFormat
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import java.io.ByteArrayOutputStream
+import java.util.*
 
 
 /**
@@ -29,6 +30,34 @@ fun ByteArray.toHexString(): String {
         result[index++] = HEX_DIGITS[b.toInt() and 0xf]
     }
     return String(result)
+}
+
+/**
+ * hex string to byte array
+ */
+fun String.hexToByteArray(): ByteArray {
+    var len = length
+    var hexString = this
+    if (len % 2 != 0) {
+        hexString = "0$hexString"
+        len++
+    }
+    val hexBytes = hexString.toUpperCase(Locale.getDefault()).toCharArray()
+    val ret = ByteArray(len shr 1)
+    var i = 0
+    while (i < len) {
+        ret[i shr 1] = ((hexBytes[i].hexToInt()) shl 4 or (hexBytes[i + 1].hexToInt())).toByte()
+        i += 2
+    }
+    return ret
+}
+
+fun Char.hexToInt(): Int {
+    return when (this) {
+        in '0'..'9' -> this - '0'
+        in 'A'..'F' -> this - 'A' + 10
+        else -> throw IllegalArgumentException()
+    }
 }
 
 /**

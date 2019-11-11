@@ -11,7 +11,7 @@ import java.io.File
  */
 class AesExtKtTest {
 
-    private val plainText = "luyao"
+    private val plainText = "路遥.zip"
     var key: ByteArray = ByteArray(128)
     var iv: ByteArray = ByteArray(128)
 

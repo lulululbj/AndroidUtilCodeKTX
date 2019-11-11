@@ -10,15 +10,17 @@ import org.junit.Assert.*
  */
 class TransformExtKtTest {
 
-    val integer = 207689539
-    val intBytes = byteArrayOf(12,97,23,67)
 
-    val short : Short = 32767
-    val shortBytes = byteArrayOf(-1,127)
+    private val text = "路遥.txt"
+    private val integer = 207689539
+    private val intBytes = byteArrayOf(12,97,23,67)
+
+    private val short : Short = 32767
+    private val shortBytes = byteArrayOf(-1,127)
 
 
-     val long = 2223372036854775807L
-     val longBytes = byteArrayOf(-1, -1, 67, 108, 22, 1, -37, 30)
+     private val long = 2223372036854775807L
+     private val longBytes = byteArrayOf(-1, -1, 67, 108, 22, 1, -37, 30)
 
     @Test
     fun test() {
@@ -42,5 +44,16 @@ class TransformExtKtTest {
         val bytesToLong = longToBytes.toLong()
         assertEquals(long,bytesToLong)
     }
+
+    @Test
+    fun toHexString() {
+        val hexString = text.toByteArray().toHexString()
+        val originString = hexString.hexToByteArray()
+
+        assertEquals(text,String(originString))
+    }
+
+
+
 
 }
