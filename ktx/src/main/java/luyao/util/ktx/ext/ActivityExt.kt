@@ -17,113 +17,88 @@ import java.io.Serializable
  * on 2019/7/9 14:17
  */
 
-
 inline fun <reified T : Activity> Activity.startKtxActivity(
-    flags: Int? = null,
-    extra: Bundle? = null,
-    value: Pair<String, Any>? = null,
-    values: Collection<Pair<String, Any>?>? = null
-) {
+    vararg values: Pair<String, Any>,
+    flag: Int? = null,
+    extra: Bundle? = null
+) =
+    startActivity(getIntent<T>(flag, extra, *values))
 
-    val list = ArrayList<Pair<String, Any>?>()
-    value?.let { list.add(it) }
-    values?.let { list.addAll(it) }
-    startActivity(getIntent<T>(flags, extra, list))
-}
 
 inline fun <reified T : Activity> Fragment.startKtxActivity(
-    flags: Int? = null,
+    flag: Int? = null,
     extra: Bundle? = null,
-    value: Pair<String, Any>? = null,
-    values: Collection<Pair<String, Any>?>? = null
+    vararg values: Pair<String, Any>
 ) =
     activity?.let {
-        val list = ArrayList<Pair<String, Any>?>()
-        value?.let { v -> list.add(v) }
-        values?.let { v -> list.addAll(v) }
-        startActivity(it.getIntent<T>(flags, extra, list))
+        startActivity(it.getIntent<T>(flag, extra, *values))
     }
 
 inline fun <reified T : Activity> Context.startKtxActivity(
-    flags: Int? = null,
+    flag: Int? = null,
     extra: Bundle? = null,
-    value: Pair<String, Any>? = null,
-    values: Collection<Pair<String, Any>?>? = null
-) {
-    val list = ArrayList<Pair<String, Any>?>()
-    value?.let { v -> list.add(v) }
-    values?.let { v -> list.addAll(v) }
-    startActivity(getIntent<T>(flags, extra, list))
-}
+    vararg values: Pair<String, Any>
+) =
+    startActivity(getIntent<T>(flag, extra, *values))
+
 
 inline fun <reified T : Activity> Activity.startKtxActivityForResult(
     requestCode: Int,
-    flags: Int? = null,
+    flag: Int? = null,
     extra: Bundle? = null,
-    value: Pair<String, Any>? = null,
-    values: Collection<Pair<String, Any>?>? = null
-) {
-    val list = ArrayList<Pair<String, Any>?>()
-    value?.let { list.add(it) }
-    values?.let { list.addAll(it) }
-    startActivityForResult(getIntent<T>(flags, extra, list), requestCode)
-}
+    vararg values: Pair<String, Any>
+) =
+    startActivityForResult(getIntent<T>(flag, extra, *values), requestCode)
+
 
 inline fun <reified T : Activity> Fragment.startKtxActivityForResult(
     requestCode: Int,
-    flags: Int? = null,
+    flag: Int? = null,
     extra: Bundle? = null,
-    value: Pair<String, Any>? = null,
-    values: Collection<Pair<String, Any>?>? = null
+    vararg values: Pair<String, Any>
 ) =
     activity?.let {
-        val list = ArrayList<Pair<String, Any>?>()
-        value?.let { list.add(it) }
-        values?.let { list.addAll(it) }
-        startActivityForResult(activity?.getIntent<T>(flags, extra, list), requestCode)
+        startActivityForResult(activity?.getIntent<T>(flag, extra, *values), requestCode)
     }
 
 inline fun <reified T : Context> Context.getIntent(
-    flags: Int? = null,
+    flag: Int? = null,
     extra: Bundle? = null,
-    pairs: List<Pair<String, Any>?>? = null
+    vararg pairs: Pair<String, Any>
 ): Intent =
     Intent(this, T::class.java).apply {
-        flags?.let { setFlags(flags) }
+        flag?.let { setFlags(flags) }
         extra?.let { putExtras(extra) }
-        pairs?.let {
-            for (pair in pairs)
-                pair?.let {
-                    val name = pair.first
-                    when (val value = pair.second) {
-                        is Int -> putExtra(name, value)
-                        is Byte -> putExtra(name, value)
-                        is Char -> putExtra(name, value)
-                        is Short -> putExtra(name, value)
-                        is Boolean -> putExtra(name, value)
-                        is Long -> putExtra(name, value)
-                        is Float -> putExtra(name, value)
-                        is Double -> putExtra(name, value)
-                        is String -> putExtra(name, value)
-                        is CharSequence -> putExtra(name, value)
-                        is Parcelable -> putExtra(name, value)
-                        is Array<*> -> putExtra(name, value)
-                        is ArrayList<*> -> putExtra(name, value)
-                        is Serializable -> putExtra(name, value)
-                        is BooleanArray -> putExtra(name, value)
-                        is ByteArray -> putExtra(name, value)
-                        is ShortArray -> putExtra(name, value)
-                        is CharArray -> putExtra(name, value)
-                        is IntArray -> putExtra(name, value)
-                        is LongArray -> putExtra(name, value)
-                        is FloatArray -> putExtra(name, value)
-                        is DoubleArray -> putExtra(name, value)
-                        is Bundle -> putExtra(name, value)
-                        is Intent -> putExtra(name, value)
-                        else -> {
-                        }
-                    }
+        pairs.forEach { pair ->
+            val name = pair.first
+            when (val value = pair.second) {
+                is Int -> putExtra(name, value)
+                is Byte -> putExtra(name, value)
+                is Char -> putExtra(name, value)
+                is Short -> putExtra(name, value)
+                is Boolean -> putExtra(name, value)
+                is Long -> putExtra(name, value)
+                is Float -> putExtra(name, value)
+                is Double -> putExtra(name, value)
+                is String -> putExtra(name, value)
+                is CharSequence -> putExtra(name, value)
+                is Parcelable -> putExtra(name, value)
+                is Array<*> -> putExtra(name, value)
+                is ArrayList<*> -> putExtra(name, value)
+                is Serializable -> putExtra(name, value)
+                is BooleanArray -> putExtra(name, value)
+                is ByteArray -> putExtra(name, value)
+                is ShortArray -> putExtra(name, value)
+                is CharArray -> putExtra(name, value)
+                is IntArray -> putExtra(name, value)
+                is LongArray -> putExtra(name, value)
+                is FloatArray -> putExtra(name, value)
+                is DoubleArray -> putExtra(name, value)
+                is Bundle -> putExtra(name, value)
+                is Intent -> putExtra(name, value)
+                else -> {
                 }
+            }
         }
     }
 

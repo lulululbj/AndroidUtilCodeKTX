@@ -28,7 +28,7 @@ class ActivityExtActivity : BaseActivity() {
         }
 
         startActivityWithFlag.setOnClickListener {
-            startKtxActivity<AnotherActivity>(Intent.FLAG_ACTIVITY_NEW_TASK)
+            startKtxActivity<AnotherActivity>(flag = Intent.FLAG_ACTIVITY_NEW_TASK)
         }
 
         startActivityForResult.setOnClickListener {
@@ -36,16 +36,14 @@ class ActivityExtActivity : BaseActivity() {
         }
 
         startActivityWithValue.setOnClickListener {
-            startKtxActivity<AnotherActivity>(value = "string" to "single value")
+            startKtxActivity<AnotherActivity>("string" to "single value")
         }
 
         startActivityWithMultiValue.setOnClickListener {
             startKtxActivity<AnotherActivity>(
-                values = arrayListOf(
-                    "int" to 1,
-                    "boolean" to true,
-                    "string" to "multi value"
-                )
+                "int" to 1,
+                "boolean" to true,
+                "string" to "multi value"
             )
         }
 

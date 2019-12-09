@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModelProviders
  * Created by luyao
  * on 2019/5/31 16:16
  */
-abstract class BaseVMActivity<VM : BaseViewModel> : AppCompatActivity(), LifecycleObserver {
+abstract class BaseVMActivity<VM : BaseViewModel> : AppCompatActivity(){
 
     lateinit var mViewModel: VM
 
@@ -31,7 +31,6 @@ abstract class BaseVMActivity<VM : BaseViewModel> : AppCompatActivity(), Lifecyc
     private fun initVM() {
         providerVMClass()?.let {
             mViewModel = ViewModelProvider(this).get(it)
-            mViewModel.let(lifecycle::addObserver)
         }
     }
 
