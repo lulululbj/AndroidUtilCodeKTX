@@ -1,5 +1,6 @@
 package luyao.util.ktx.ext
 
+import android.app.Activity
 import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
@@ -151,6 +152,17 @@ fun Context.sendEmail(email: String, subject: String?, text: String?) {
         text?.let { putExtra(Intent.EXTRA_TEXT, text) }
         startActivity(this)
     }
+}
+
+fun Activity.startFileChooser(requestCode: Int, allowMultiple: Boolean = false) {
+    val intent = Intent(Intent.ACTION_GET_CONTENT)
+    intent.type = "*/*"
+    intent.addCategory(Intent.CATEGORY_OPENABLE)
+    if (fromSpecificVersion(Build.VERSION_CODES.JELLY_BEAN_MR2)) intent.putExtra(
+        Intent.EXTRA_ALLOW_MULTIPLE,
+        allowMultiple
+    )
+    startActivityForResult(Intent.createChooser(intent, "Choose File"), requestCode)
 }
 
 

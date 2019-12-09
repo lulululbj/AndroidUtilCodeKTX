@@ -39,6 +39,7 @@
         <activity android:name="luyao.util.ktx.ui.ShellExtActivity"/>
         <activity android:name="luyao.util.ktx.ui.LifeCycleActivity"/>
         <activity android:name="luyao.util.ktx.ui.KtxSpanActivity"/>
+        <activity android:name="luyao.util.ktx.ui.ChooseFileActivity" />
     </application>
 
 </manifest>

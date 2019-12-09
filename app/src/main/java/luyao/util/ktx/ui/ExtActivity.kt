@@ -22,6 +22,7 @@ class ExtActivity : CommonListActivity() {
             add(ItemBean("SharedPreferencesExt", SharedPreferencesActivity::class.java))
             add(ItemBean("ShellExt", ShellExtActivity::class.java))
             add(ItemBean("ToastExt", ToastExtActivity::class.java))
+            add(ItemBean("UriExt",ChooseFileActivity::class.java))
         }
     }
 

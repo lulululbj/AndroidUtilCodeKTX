@@ -32,7 +32,7 @@ val Context.screenWidth
 val Context.screenHeight
     get() = resources.displayMetrics.heightPixels
 
-
+fun fromKitKat() = fromSpecificVersion(Build.VERSION_CODES.KITKAT)
 fun fromM() = fromSpecificVersion(Build.VERSION_CODES.M)
 fun beforeM() = beforeSpecificVersion(Build.VERSION_CODES.M)
 fun fromN() = fromSpecificVersion(Build.VERSION_CODES.N)
